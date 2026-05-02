@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Meadowbrook Retirement Home</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Lora:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --cream: #fdf6ec;
+      --warm-white: #fffaf3;
+      --sand: #e8d5b7;
+      --terracotta: #c2714f;
+      --terracotta-dark: #a05a3a;
+      --sage: #7a9e7e;
+      --sage-dark: #5c7d60;
+      --brown: #6b4c3b;
+      --brown-light: #9b7060;
+      --text: #3d2b1f;
+      --text-light: #6b5244;
+      --gold: #c9963a;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Lora', Georgia, serif;
+      background-color: var(--cream);
+      color: var(--text);
+      line-height: 1.7;
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      background: rgba(253, 246, 236, 0.96);
+      backdrop-filter: blur(8px);
+      border-bottom: 1px solid var(--sand);
+      padding: 0 2rem;
+      display: flex; align-items: center; justify-content: space-between;
+      height: 70px;
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.4rem;
+      font-weight: 700;
+      color: var(--brown);
+      text-decoration: none;
+      display: flex; align-items: center; gap: 0.5rem;
+    }
+    .nav-logo span { color: var(--terracotta); }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      font-family: 'Lora', serif;
+      font-size: 0.9rem;
+      color: var(--text-light);
+      text-decoration: none;
+      letter-spacing: 0.02em;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--terracotta); }
+    .nav-cta {
+      background: var(--terracotta);
+      color: #fff !important;
+      padding: 0.5rem 1.2rem;
+      border-radius: 30px;
+      transition: background 0.2s !important;
+    }
+    .nav-cta:hover { background: var(--terracotta-dark) !important; color: #fff !important; }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      padding-top: 70px;
+      display: flex; align-items: center;
+      background:
+        radial-gradient(ellipse at 80% 20%, rgba(194,113,79,0.12) 0%, transparent 55%),
+        radial-gradient(ellipse at 10% 80%, rgba(122,158,126,0.15) 0%, transparent 50%),
+        var(--cream);
+      position: relative; overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c2714f' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      opacity: 0.6;
+    }
+    .hero-inner {
+      max-width: 1100px; margin: 0 auto; padding: 4rem 2rem;
+      display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center;
+      position: relative;
+    }
+    .hero-tag {
+      display: inline-block;
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--sage-dark);
+      background: rgba(122,158,126,0.15);
+      padding: 0.35rem 1rem;
+      border-radius: 20px;
+      margin-bottom: 1.2rem;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.4rem, 5vw, 3.6rem);
+      font-weight: 700;
+      line-height: 1.2;
+      color: var(--brown);
+      margin-bottom: 1.2rem;
+    }
+    .hero h1 em { color: var(--terracotta); font-style: italic; }
+    .hero p {
+      font-size: 1.05rem;
+      color: var(--text-light);
+      max-width: 460px;
+      margin-bottom: 2rem;
+    }
+    .hero-buttons { display: flex; gap: 1rem; flex-wrap: wrap; }
+    .btn-primary {
+      background: var(--terracotta);
+      color: #fff;
+      padding: 0.8rem 2rem;
+      border-radius: 40px;
+      text-decoration: none;
+      font-family: 'Lora', serif;
+      font-size: 0.95rem;
+      transition: background 0.2s, transform 0.15s;
+      display: inline-block;
+    }
+    .btn-primary:hover { background: var(--terracotta-dark); transform: translateY(-2px); }
+    .btn-outline {
+      border: 2px solid var(--sage);
+      color: var(--sage-dark);
+      padding: 0.8rem 2rem;
+      border-radius: 40px;
+      text-decoration: none;
+      font-family: 'Lora', serif;
+      font-size: 0.95rem;
+      transition: all 0.2s;
+      display: inline-block;
+    }
+    .btn-outline:hover { background: var(--sage); color: #fff; transform: translateY(-2px); }
+
+    .hero-image-stack { position: relative; height: 460px; }
+    .hero-card {
+      position: absolute;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 12px 40px rgba(107,76,59,0.18);
+    }
+    .hero-card-main {
+      width: 300px; height: 380px;
+      top: 20px; left: 40px;
+      background: linear-gradient(160deg, #d4a574, #a07050);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      color: white;
+      font-size: 5rem;
+    }
+    .hero-card-secondary {
+      width: 200px; height: 220px;
+      bottom: 10px; right: 10px;
+      background: linear-gradient(160deg, #8aad8e, #5c7d60);
+      display: flex; flex-direction: column;
+      align-items: center; justify-content: center;
+      color: white;
+      font-size: 3.5rem;
+    }
+    .hero-card-accent {
+      width: 130px; height: 130px;
+      top: 0; right: 50px;
+      background: linear-gradient(160deg, #f0c987, #c9963a);
+      display: flex; align-items: center; justify-content: center;
+      color: white; font-size: 2.5rem;
+      border-radius: 50%;
+      box-shadow: 0 8px 30px rgba(201,150,58,0.35);
+    }
+    .card-label {
+      font-family: 'Lora', serif;
+      font-size: 0.8rem;
+      margin-top: 0.5rem;
+      opacity: 0.9;
+    }
+
+    /* ─── STATS ─── */
+    .stats-bar {
+      background: var(--brown);
+      padding: 2rem;
+    }
+    .stats-inner {
+      max-width: 1100px; margin: 0 auto;
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      text-align: center; gap: 1rem;
+    }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.2rem;
+      color: var(--gold);
+      font-weight: 700;
+    }
+    .stat-label {
+      font-size: 0.85rem;
+      color: rgba(255,250,243,0.7);
+      letter-spacing: 0.05em;
+    }
+
+    /* ─── SECTION STYLES ─── */
+    section { padding: 5rem 2rem; }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
+    .section-tag {
+      font-size: 0.78rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--terracotta);
+      margin-bottom: 0.5rem;
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      color: var(--brown);
+      margin-bottom: 1rem;
+      line-height: 1.25;
+    }
+    .section-sub {
+      color: var(--text-light);
+      font-size: 1rem;
+      max-width: 560px;
+      margin-bottom: 3rem;
+    }
+
+    /* ─── ABOUT ─── */
+    #about { background: var(--warm-white); }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: center;
+    }
+    .about-image {
+      background: linear-gradient(135deg, #d4a574 0%, #8aad8e 100%);
+      border-radius: 20px;
+      height: 400px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 7rem;
+      box-shadow: 0 16px 50px rgba(107,76,59,0.15);
+      position: relative;
+      overflow: hidden;
+    }
+    .about-image::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to bottom right, rgba(255,255,255,0.15), transparent);
+    }
+    .about-values { display: flex; flex-direction: column; gap: 1.2rem; margin-top: 1.5rem; }
+    .value-item {
+      display: flex; gap: 1rem; align-items: flex-start;
+    }
+    .value-icon {
+      width: 42px; height: 42px; flex-shrink: 0;
+      background: rgba(194,113,79,0.12);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .value-item h4 {
+      font-family: 'Playfair Display', serif;
+      color: var(--brown);
+      margin-bottom: 0.2rem;
+    }
+    .value-item p { font-size: 0.9rem; color: var(--text-light); }
+
+    /* ─── SERVICES ─── */
+    #services { background: var(--cream); }
+    .services-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+    .service-card {
+      background: var(--warm-white);
+      border-radius: 16px;
+      padding: 2rem;
+      border: 1px solid var(--sand);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .service-card:hover { transform: translateY(-4px); box-shadow: 0 12px 35px rgba(107,76,59,0.12); }
+    .service-icon {
+      font-size: 2.2rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+    .service-card h3 {
+      font-family: 'Playfair Display', serif;
+      color: var(--brown);
+      font-size: 1.15rem;
+      margin-bottom: 0.6rem;
+    }
+    .service-card p { font-size: 0.88rem; color: var(--text-light); line-height: 1.6; }
+
+    /* ─── FUNDRAISER ─── */
+    #fundraiser {
+      background: linear-gradient(135deg, #3d2b1f 0%, #6b4c3b 100%);
+      position: relative; overflow: hidden;
+    }
+    #fundraiser::before {
+      content: '❤️';
+      font-size: 18rem;
+      position: absolute;
+      right: -2rem; top: -3rem;
+      opacity: 0.05;
+      line-height: 1;
+    }
+    #fundraiser .section-tag { color: var(--gold); }
+    #fundraiser .section-title { color: #fff; }
+    #fundraiser .section-sub { color: rgba(255,250,243,0.7); max-width: 600px; }
+    .fundraiser-content { display: grid; grid-template-columns: 1.3fr 1fr; gap: 4rem; align-items: center; }
+    .progress-wrap { margin-bottom: 2rem; }
+    .progress-label {
+      display: flex; justify-content: space-between;
+      font-size: 0.85rem;
+      color: rgba(255,250,243,0.7);
+      margin-bottom: 0.5rem;
+    }
+    .progress-label strong { color: var(--gold); font-size: 1rem; }
+    .progress-bar-bg {
+      background: rgba(255,255,255,0.15);
+      border-radius: 20px; height: 14px; overflow: hidden;
+    }
+    .progress-bar-fill {
+      width: 67%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--gold), #e8b84b);
+      border-radius: 20px;
+      animation: fillBar 2s ease-out;
+    }
+    @keyframes fillBar { from { width: 0; } to { width: 67%; } }
+    .donation-tiers { display: flex; flex-direction: column; gap: 0.8rem; margin-top: 1.5rem; }
+    .tier-btn {
+      background: transparent;
+      border: 1.5px solid rgba(255,255,255,0.3);
+      border-radius: 10px;
+      padding: 0.8rem 1.2rem;
+      color: #fff;
+      font-family: 'Lora', serif;
+      font-size: 0.95rem;
+      cursor: pointer;
+      display: flex; justify-content: space-between; align-items: center;
+      transition: all 0.2s;
+    }
+    .tier-btn:hover, .tier-btn.active {
+      background: var(--gold); border-color: var(--gold); color: var(--brown);
+    }
+    .tier-btn span { font-size: 0.8rem; opacity: 0.75; }
+    .donate-form { margin-top: 1rem; }
+    .donate-form input {
+      width: 100%;
+      padding: 0.9rem 1.2rem;
+      border-radius: 10px;
+      border: 1.5px solid rgba(255,255,255,0.2);
+      background: rgba(255,255,255,0.1);
+      color: #fff;
+      font-family: 'Lora', serif;
+      font-size: 1rem;
+      margin-bottom: 0.8rem;
+      outline: none;
+    }
+    .donate-form input::placeholder { color: rgba(255,255,255,0.4); }
+    .donate-form input:focus { border-color: var(--gold); }
+    .btn-donate {
+      width: 100%;
+      background: var(--gold);
+      color: var(--brown);
+      border: none;
+      padding: 1rem;
+      border-radius: 10px;
+      font-family: 'Playfair Display', serif;
+      font-size: 1.05rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .btn-donate:hover { background: #e8b84b; transform: translateY(-2px); }
+
+    /* ─── ACTIVITIES ─── */
+    #activities { background: var(--warm-white); }
+    .activities-grid {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.2rem;
+    }
+    .activity-card {
+      background: var(--cream);
+      border-radius: 14px;
+      padding: 1.5rem;
+      text-align: center;
+      border: 1px solid var(--sand);
+      transition: transform 0.2s;
+    }
+    .activity-card:hover { transform: translateY(-3px); }
+    .activity-emoji { font-size: 2.5rem; display: block; margin-bottom: 0.8rem; }
+    .activity-card h4 {
+      font-family: 'Playfair Display', serif;
+      color: var(--brown);
+      margin-bottom: 0.4rem;
+      font-size: 1rem;
+    }
+    .activity-card p { font-size: 0.82rem; color: var(--text-light); }
+
+    /* ─── TESTIMONIALS ─── */
+    #testimonials { background: var(--cream); }
+    .testimonials-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .testimonial-card {
+      background: var(--warm-white);
+      border-radius: 16px;
+      padding: 2rem;
+      border: 1px solid var(--sand);
+      position: relative;
+    }
+    .testimonial-card::before {
+      content: '"';
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      color: var(--terracotta);
+      opacity: 0.2;
+      position: absolute;
+      top: -0.5rem; left: 1.2rem;
+      line-height: 1;
+    }
+    .testimonial-text {
+      font-style: italic;
+      color: var(--text-light);
+      font-size: 0.93rem;
+      margin-bottom: 1.2rem;
+      position: relative;
+    }
+    .testimonial-author {
+      display: flex; align-items: center; gap: 0.8rem;
+    }
+    .author-avatar {
+      width: 42px; height: 42px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.3rem;
+    }
+    .author-name {
+      font-family: 'Playfair Display', serif;
+      color: var(--brown);
+      font-size: 0.95rem;
+    }
+    .author-rel { font-size: 0.78rem; color: var(--text-light); }
+
+    /* ─── CONTACT ─── */
+    #contact { background: var(--warm-white); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 4rem; align-items: start; }
+    .contact-info { display: flex; flex-direction: column; gap: 1.5rem; }
+    .contact-item { display: flex; gap: 1rem; align-items: flex-start; }
+    .contact-icon {
+      width: 44px; height: 44px; flex-shrink: 0;
+      background: rgba(122,158,126,0.15);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 1.2rem;
+    }
+    .contact-item h4 {
+      font-family: 'Playfair Display', serif;
+      color: var(--brown);
+      margin-bottom: 0.2rem;
+    }
+    .contact-item p, .contact-item a {
+      font-size: 0.9rem; color: var(--text-light);
+      text-decoration: none;
+    }
+    .contact-item a:hover { color: var(--terracotta); }
+    .contact-form { display: flex; flex-direction: column; gap: 1rem; }
+    .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
+    .form-group label { font-size: 0.82rem; color: var(--text-light); letter-spacing: 0.05em; }
+    .form-group input,
+    .form-group select,
+    .form-group textarea {
+      padding: 0.85rem 1rem;
+      border: 1.5px solid var(--sand);
+      border-radius: 10px;
+      font-family: 'Lora', serif;
+      font-size: 0.93rem;
+      color: var(--text);
+      background: var(--cream);
+      outline: none;
+      transition: border-color 0.2s;
+      resize: vertical;
+    }
+    .form-group input:focus,
+    .form-group select:focus,
+    .form-group textarea:focus { border-color: var(--sage); }
+    .form-group textarea { min-height: 110px; }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--brown);
+      color: rgba(255,250,243,0.7);
+      padding: 3rem 2rem 2rem;
+      text-align: center;
+    }
+    .footer-inner { max-width: 1100px; margin: 0 auto; }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.5rem;
+      color: var(--gold);
+      margin-bottom: 0.5rem;
+    }
+    .footer-tagline { font-size: 0.88rem; margin-bottom: 1.5rem; }
+    .footer-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem; }
+    .footer-links a { color: rgba(255,250,243,0.6); text-decoration: none; font-size: 0.88rem; transition: color 0.2s; }
+    .footer-links a:hover { color: var(--gold); }
+    .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,0.1); margin: 1.5rem 0; }
+    .footer-bottom { font-size: 0.8rem; opacity: 0.5; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .hero-inner, .about-grid, .fundraiser-content,
+      .contact-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-image-stack { display: none; }
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .activities-grid { grid-template-columns: repeat(2, 1fr); }
+      .testimonials-grid { grid-template-columns: 1fr; }
+      .stats-inner { grid-template-columns: repeat(2, 1fr); }
+      .nav-links { display: none; }
+      .form-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 550px) {
+      .services-grid { grid-template-columns: 1fr; }
+      .activities-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    /* ─── ANIMATIONS ─── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .fade-in.visible { opacity: 1; transform: none; }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-logo">🌿 <span>Meadowbrook</span> Retirement Home</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#activities">Activities</a></li>
+    <li><a href="#fundraiser">Support Us</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#contact" class="nav-cta">Book a Tour</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<section id="home">
+  <div class="hero">
+    <div class="hero-inner">
+      <div class="fade-in">
+        <div class="hero-tag">✦ A Place to Call Home</div>
+        <h1>Where Every Day Feels Like <em>Family</em></h1>
+        <p>At Meadowbrook, we believe retirement should be filled with warmth, purpose, and belonging. Our caring community is here for every chapter of life.</p>
+        <div class="hero-buttons">
+          <a href="#contact" class="btn-primary">Book a Tour</a>
+          <a href="#services" class="btn-outline">Our Services</a>
+        </div>
+      </div>
+      <div class="hero-image-stack fade-in">
+        <div class="hero-card hero-card-accent">☀️</div>
+        <div class="hero-card hero-card-main">
+          🏡
+          <div class="card-label">Your Home</div>
+        </div>
+        <div class="hero-card hero-card-secondary">
+          🌻
+          <div class="card-label">Community</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-bar">
+  <div class="stats-inner">
+    <div class="fade-in">
+      <div class="stat-num">25+</div>
+      <div class="stat-label">Years of Care</div>
+    </div>
+    <div class="fade-in">
+      <div class="stat-num">120</div>
+      <div class="stat-label">Residents</div>
+    </div>
+    <div class="fade-in">
+      <div class="stat-num">85+</div>
+      <div class="stat-label">Dedicated Staff</div>
+    </div>
+    <div class="fade-in">
+      <div class="stat-num">4.9★</div>
+      <div class="stat-label">Family Satisfaction</div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="section-inner">
+    <div class="about-grid">
+      <div class="about-image fade-in">🏡</div>
+      <div class="fade-in">
+        <div class="section-tag">About Meadowbrook</div>
+        <h2 class="section-title">A Community Built on Compassion</h2>
+        <p class="section-sub" style="margin-bottom:1.5rem;">Founded in 1999, Meadowbrook Retirement Home has been a cornerstone of our community — offering personalised, compassionate care in a warm, welcoming environment that feels like home.</p>
+        <div class="about-values">
+          <div class="value-item">
+            <div class="value-icon">💛</div>
+            <div>
+              <h4>Person-Centred Care</h4>
+              <p>Every resident is unique. We tailor care plans to honour each person's history, preferences, and needs.</p>
+            </div>
+          </div>
+          <div class="value-item">
+            <div class="value-icon">🤝</div>
+            <div>
+              <h4>Family Partnership</h4>
+              <p>We keep families connected and informed every step of the way — because you're part of our team.</p>
+            </div>
+          </div>
+          <div class="value-item">
+            <div class="value-icon">🌿</div>
+            <div>
+              <h4>Dignity & Respect</h4>
+              <p>We uphold the dignity of every resident, fostering independence and a sense of purpose each day.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section id="services">
+  <div class="section-inner">
+    <div class="fade-in">
+      <div class="section-tag">What We Offer</div>
+      <h2 class="section-title">Care That Grows With You</h2>
+      <p class="section-sub">From independent living to specialised memory care, our full range of services is designed to meet you wherever you are.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card fade-in">
+        <span class="service-icon">🏠</span>
+        <h3>Residential Living</h3>
+        <p>Comfortable, private suites with personalised décor options, housekeeping, and all-inclusive meals in our sunny dining room.</p>
+      </div>
+      <div class="service-card fade-in">
+        <span class="service-icon">💊</span>
+        <h3>Medical & Nursing Care</h3>
+        <p>24/7 registered nurses on site, medication management, and co-ordination with specialist doctors for peace of mind.</p>
+      </div>
+      <div class="service-card fade-in">
+        <span class="service-icon">🧠</span>
+        <h3>Memory Care</h3>
+        <p>A safe, specially designed wing for residents living with dementia, staffed by certified memory care specialists.</p>
+      </div>
+      <div class="service-card fade-in">
+        <span class="service-icon">🧘</span>
+        <h3>Physiotherapy & Wellness</h3>
+        <p>On-site physio, gentle exercise classes, hydrotherapy pool access, and ongoing wellness assessments.</p>
+      </div>
+      <div class="service-card fade-in">
+        <span class="service-icon">🍽️</span>
+        <h3>Nutritional Dining</h3>
+        <p>Chef-prepared meals daily with dietary accommodations, plus a café lounge open all day for snacks and socialising.</p>
+      </div>
+      <div class="service-card fade-in">
+        <span class="service-icon">🚐</span>
+        <h3>Transport & Outings</h3>
+        <p>Regular community outings, medical transport, and shuttle services to keep residents connected with the wider world.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ACTIVITIES -->
+<section id="activities">
+  <div class="section-inner">
+    <div class="fade-in">
+      <div class="section-tag">Life at Meadowbrook</div>
+      <h2 class="section-title">Every Day, Something to Look Forward To</h2>
+      <p class="section-sub">Our lifestyle team curates a full calendar of enriching activities designed to spark joy and connection.</p>
+    </div>
+    <div class="activities-grid">
+      <div class="activity-card fade-in">
+        <span class="activity-emoji">🎨</span>
+        <h4>Arts & Crafts</h4>
+        <p>Weekly painting, pottery, and creative workshops</p>
+      </div>
+      <div class="activity-card fade-in">
+        <span class="activity-emoji">🎵</span>
+        <h4>Music & Singing</h4>
+        <p>Live performances, sing-alongs & music therapy</p>
+      </div>
+      <div class="activity-card fade-in">
+        <span class="activity-emoji">🌷</span>
+        <h4>Gardening Club</h4>
+        <p>Tending our beautiful cottage gardens together</p>
+      </div>
+      <div class="activity-card fade-in">
+        <span class="activity-emoji">📚</span>
+        <h4>Book Club</h4>
+        <p>Monthly reads and lively group discussions</p>
+      </div>
+      <div class="activity-card fade-in">
+        <span class="activity-emoji">🎲</span>
+        <h4>Games & Puzzles</h4>
+        <p>Board games, cards, trivia & chess afternoons</p>
+      </div>
+      <div class="activity-card fade-in">
+        <span class="activity-emoji">🙏</span>
+        <h4>Spiritual Services</h4>
+        <p>Non-denominational services & chaplaincy support</p>
+      </div>
+      <div class="activity-card fade-in">
+        <span class="activity-emoji">🎬</span>
+        <h4>Movie Nights</h4>
+        <p>Weekly cinema evenings in our cosy lounge</p>
+      </div>
+      <div class="activity-card fade-in">
+        <span class="activity-emoji">🚶</span>
+        <h4>Walking Groups</h4>
+        <p>Gentle guided walks through our scenic grounds</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TESTIMONIALS -->
+<section id="testimonials">
+  <div class="section-inner">
+    <div class="fade-in">
+      <div class="section-tag">Families Say</div>
+      <h2 class="section-title">Stories From Our Community</h2>
+    </div>
+    <div class="testimonials-grid">
+      <div class="testimonial-card fade-in">
+        <p class="testimonial-text">Moving Mum to Meadowbrook was the best decision our family made. She's thriving — she has friends, activities she loves, and the staff know her by name. We feel so reassured.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background:rgba(194,113,79,0.15)">👩</div>
+          <div>
+            <div class="author-name">Sandra M.</div>
+            <div class="author-rel">Daughter of resident</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-in">
+        <p class="testimonial-text">Dad was hesitant at first, but within a month he told me he didn't want to leave! The staff go above and beyond. It genuinely feels like family here.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background:rgba(122,158,126,0.15)">👨</div>
+          <div>
+            <div class="author-name">Robert K.</div>
+            <div class="author-rel">Son of resident</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card fade-in">
+        <p class="testimonial-text">The memory care team's patience and expertise with my wife is extraordinary. She is safe, loved, and at peace. I can't thank Meadowbrook enough.</p>
+        <div class="testimonial-author">
+          <div class="author-avatar" style="background:rgba(201,150,58,0.15)">👴</div>
+          <div>
+            <div class="author-name">Gerald T.</div>
+            <div class="author-rel">Husband of resident</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FUNDRAISER -->
+<section id="fundraiser">
+  <div class="section-inner">
+    <div class="fundraiser-content">
+      <div class="fade-in">
+        <div class="section-tag">Support Our Community</div>
+        <h2 class="section-title">Help Us Build a Brighter Garden Wing</h2>
+        <p class="section-sub">We're raising funds to create a new therapeutic garden and sensory space for our memory care residents — a place of peace, beauty, and healing.</p>
+        <div class="progress-wrap">
+          <div class="progress-label">
+            <span>Raised so far</span>
+            <strong>$67,000 of $100,000</strong>
+          </div>
+          <div class="progress-bar-bg">
+            <div class="progress-bar-fill"></div>
+          </div>
+        </div>
+        <p style="color:rgba(255,250,243,0.6); font-size:0.88rem;">Every contribution, big or small, makes a real difference to the lives of our residents. Donations are tax deductible.</p>
+      </div>
+      <div class="fade-in">
+        <div class="donation-tiers">
+          <button class="tier-btn active" onclick="setDonation(25, this)">$25 <span>Plants a flower bed</span></button>
+          <button class="tier-btn" onclick="setDonation(50, this)">$50 <span>Funds a sensory corner</span></button>
+          <button class="tier-btn" onclick="setDonation(100, this)">$100 <span>Sponsors a garden bench</span></button>
+          <button class="tier-btn" onclick="setDonation(250, this)">$250 <span>Names a garden pathway</span></button>
+        </div>
+        <div class="donate-form">
+          <input type="number" id="donation-amount" value="25" placeholder="Enter custom amount ($)" />
+          <input type="text" placeholder="Your name (optional)" />
+          <button class="btn-donate" onclick="handleDonate()">💛 Donate Now</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact">
+  <div class="section-inner">
+    <div class="fade-in">
+      <div class="section-tag">Get in Touch</div>
+      <h2 class="section-title">We'd Love to Meet You</h2>
+      <p class="section-sub">Book a tour, ask a question, or simply come by for a cup of tea. Our team is always happy to help.</p>
+    </div>
+    <div class="contact-grid">
+      <div class="fade-in">
+        <div class="contact-info">
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div>
+              <h4>Address</h4>
+              <p>42 Meadowbrook Lane<br>Springfield, ST 12345</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div>
+              <h4>Phone</h4>
+              <a href="tel:+10000000000">(000) 000-0000</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">✉️</div>
+            <div>
+              <h4>Email</h4>
+              <a href="mailto:hello@meadowbrook.com">hello@meadowbrook.com</a>
+            </div>
+          </div>
+          <div class="contact-item">
+            <div class="contact-icon">🕐</div>
+            <div>
+              <h4>Visiting Hours</h4>
+              <p>Mon–Sun: 9:00 AM – 7:00 PM<br>Office: Mon–Fri: 8:00 AM – 5:00 PM</p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fade-in">
+        <div class="contact-form">
+          <div class="form-row">
+            <div class="form-group">
+              <label>FIRST NAME</label>
+              <input type="text" placeholder="Jane" />
+            </div>
+            <div class="form-group">
+              <label>LAST NAME</label>
+              <input type="text" placeholder="Smith" />
+            </div>
+          </div>
+          <div class="form-group">
+            <label>EMAIL</label>
+            <input type="email" placeholder="jane@email.com" />
+          </div>
+          <div class="form-group">
+            <label>ENQUIRY TYPE</label>
+            <select>
+              <option>Book a Tour</option>
+              <option>Admission Enquiry</option>
+              <option>Services & Pricing</option>
+              <option>Fundraiser / Donation</option>
+              <option>General Question</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label>MESSAGE</label>
+            <textarea placeholder="Tell us how we can help..."></textarea>
+          </div>
+          <button class="btn-primary" style="border:none;cursor:pointer;font-size:1rem;padding:1rem 2rem;width:100%;" onclick="handleSubmit()">Send Message →</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">🌿 Meadowbrook Retirement Home</div>
+    <div class="footer-tagline">Warmth, dignity, and belonging — every single day.</div>
+    <div class="footer-links">
+      <a href="#home">Home</a>
+      <a href="#about">About</a>
+      <a href="#services">Services</a>
+      <a href="#activities">Activities</a>
+      <a href="#fundraiser">Support Us</a>
+      <a href="#contact">Contact</a>
+    </div>
+    <hr class="footer-divider" />
+    <div class="footer-bottom">© 2025 Meadowbrook Retirement Home. All rights reserved. | Privacy Policy | Terms of Use</div>
+  </div>
+</footer>
+
+<script>
+  // Scroll animations
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  // Donation tier selection
+  function setDonation(amount, btn) {
+    document.getElementById('donation-amount').value = amount;
+    document.querySelectorAll('.tier-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+  }
+
+  // Donate handler
+  function handleDonate() {
+    const amt = document.getElementById('donation-amount').value;
+    if (!amt || amt <= 0) { alert('Please enter a valid donation amount.'); return; }
+    alert(`Thank you for your generous donation of $${amt}! This is a demo — payment integration would be connected here.`);
+  }
+
+  // Contact form handler
+  function handleSubmit() {
+    alert('Thank you for your message! Our team will be in touch within one business day.');
+  }
+</script>
+</body>
+</html>
