@@ -69,7 +69,7 @@ nav ul li a:hover{
   color: var(--color-warmGold);
 }
 
-section{
+.main-header{
   min-height: 100vh;
   background-color: var(--color-primaryMaroon);
   display: flex;
@@ -80,15 +80,23 @@ section{
   padding: 2rem;
 }
 
+.main-header p {
+  color: var(--color-cream);
+}
+
 h1{
   font-family: var(--font-heading);
   font-size: var(--font-size-display);
-  color: var(--color-cream);
+  color: var(--color-nearBlack);
   margin-bottom: 1.5rem;
 }
 
-p{
+.main-header h1 {
   color: var(--color-cream);
+}
+
+p{
+  color: var(--color-nearBlack);
   font-size: var(--font-size-body);
   margin-bottom: 1.5rem;
 }
@@ -107,4 +115,37 @@ cursor: pointer;
 
 button:hover{
   background-color: var(--color-midMaroon);
+}
+
+.intro {
+  background-color: var(--color-midRose);
+  padding: 4rem 2rem;
+  max-width: 100%;
+ width: 800px;
+ 
+ margin: 0 auto;
+ display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+}
+
+.intro h2 {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-h2);
+  margin-bottom: 2rem;
+}
+
+.intro a {
+color: var(--color-nearBlack);
+text-decoration: none;
+font-size: var(--font-size-lead);
+transition: color 0.3s ease;
+border-bottom: 2px solid var(--color-primaryMaroon);
+font-weight: 600;
+display: inline-block;
+}
+
+.intro a:hover {
+color: var(--color-midMaroon);
 }
