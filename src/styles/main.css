@@ -120,8 +120,9 @@ button:hover{
 .intro {
   background-color: var(--color-midRose);
   padding: 4rem 2rem;
+   width: 800px;
   max-width: 100%;
- width: 800px;
+
  
  margin: 0 auto;
  display: flex;
@@ -148,4 +149,35 @@ display: inline-block;
 
 .intro a:hover {
 color: var(--color-midMaroon);
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.values{
+  background-color: var(--color-midMaroon);
+  padding: 4rem 2rem;
+}
+
+.value-card{
+  background-color: var(--color-warmGold);
+  padding: 1rem;
+  border-radius: 8%;
+  text-align: center;
+}
+
+h3{
+  font-family: var(--font-heading);
+  font-size: var(--font-size-h3);
+}
+
+.value-icon{
+  font-size: 2.5rem;
+  display: block;
+  margin-bottom: 1rem;
 }
