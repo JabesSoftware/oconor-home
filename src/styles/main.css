@@ -78,11 +78,10 @@ nav ul li a:hover{
   align-items: center;
   text-align: center;
   padding: 2rem;
+    color: var(--color-cream);
 }
 
-.main-header p {
-  color: var(--color-cream);
-}
+
 
 h1{
   font-family: var(--font-heading);
@@ -120,15 +119,28 @@ button:hover{
 .intro {
   background-color: var(--color-midRose);
   padding: 4rem 2rem;
-   width: 800px;
-  max-width: 100%;
 
- 
+}
+.intro-inner{
+    
+  max-width: 800px;
+   width: 100%;
  margin: 0 auto;
  display: flex;
   justify-content: center;
   text-align: center;
   flex-direction: column;
+}
+
+.main-header{
+  min-height: 100vh;
+  background-color: var(--color-primaryMaroon);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 2rem;
 }
 
 .intro h2 {
@@ -167,7 +179,7 @@ color: var(--color-midMaroon);
 .value-card{
   background-color: var(--color-warmGold);
   padding: 1rem;
-  border-radius: 8%;
+  border-radius: 8px;
   text-align: center;
 }
 
@@ -180,4 +192,30 @@ h3{
   font-size: 2.5rem;
   display: block;
   margin-bottom: 1rem;
+}
+
+.testimonial-preview{
+  background-color: var(--color-primaryMaroon);
+  padding: 6rem 3rem;
+}
+.testimonial-preview-inner{
+
+  justify-content: center;
+  display: flex;
+  text-align: center;
+  max-width: 800px;
+  margin: 0 auto;
+  flex-direction: column;
+}
+
+.testimonial-preview blockquote{
+  font-family: var(--font-heading);
+  font-size: var(--font-size-lead);
+  color: var(--color-paleRose);
+}
+
+.testimonial-preview cite{
+   font-family: var(--font-heading);
+  font-size: var(--font-size-caption);
+  color: var(--color-grey);
 }
