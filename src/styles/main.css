@@ -208,10 +208,11 @@ h3{
   flex-direction: column;
 }
 
-.testimonial-preview blockquote{
+.testimonial-preview blockquote p{
+    color: var(--color-paleRose);
   font-family: var(--font-heading);
   font-size: var(--font-size-lead);
-  color: var(--color-paleRose);
+
 }
 
 .testimonial-preview cite{
