@@ -261,3 +261,42 @@ h3 {
   border-bottom: 2px solid var(--color-deepWine);
   display: inline-block;
 }
+
+.project-overview-preview{
+background-color: var(--color-sand);
+padding: 6rem 3rem;
+}
+
+.project-overview-inner{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  justify-content: center;
+  text-align: center;
+}
+
+.project-overview-inner h2{
+   color: var(--color-nearBlack);
+  text-decoration: none;
+   text-align: center;
+  font-size: var(--font-size-h2);
+  font-family: var(--font-heading);
+}
+
+.project-overview-inner p {
+    color: var(--color-nearBlack);
+  font-size: var(--font-size-body);
+  text-align: center;
+}
+
+.project-overview-inner a {
+    color: var(--color-nearBlack);
+  text-decoration: none;
+   text-align: center;
+  font-size: var(--font-size-caption);
+  font-weight: 600;
+  border-bottom: 2px solid var(--color-deepWine);
+  display: inline-block;
+}
