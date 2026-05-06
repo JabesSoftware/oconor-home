@@ -133,17 +133,6 @@ button:hover {
   flex-direction: column;
 }
 
-.main-header {
-  min-height: 100vh;
-  background-color: var(--color-primaryMaroon);
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-  padding: 2rem;
-}
-
 .intro h2 {
   font-family: var(--font-heading);
   font-size: var(--font-size-h2);
@@ -299,4 +288,109 @@ padding: 6rem 3rem;
   font-weight: 600;
   border-bottom: 2px solid var(--color-deepWine);
   display: inline-block;
+}
+
+.donate-cta{
+background-color: var(--color-primaryMaroon);
+padding: 6rem 3rem;
+}
+
+.donate-cta-inner{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  justify-content: center;
+  text-align: center;
+}
+
+.donate-cta-inner p {
+    color: var(--color-cream);
+  font-size: var(--font-size-body);
+  text-align: center;
+  
+}
+
+.donate-cta-inner h2{
+     color: var(--color-cream);
+  text-decoration: none;
+   text-align: center;
+  font-size: var(--font-size-h2);
+  font-family: var(--font-heading);
+}
+
+.btn-primary {
+  background-color: var(--color-warmGold);
+  color: var(--color-deepWine);
+  padding: 0.75rem 2rem;
+  border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+.btn-primary:hover{
+background-color: var(--color-midMaroon);
+}
+
+.btn-secondary{
+  background-color: rgba(250, 245, 239, 0.15);
+  color: var(--color-cream);
+  border: 2px solid var(--color-warmGold);
+  padding: 0.75rem 2rem;
+  border-radius: 4px;
+  text-decoration: none;
+      transition: background-color 0.3s ease;
+}
+
+.btn-secondary:hover{
+background-color: var(--color-midMaroon);
+}
+
+.donor-wall{
+
+  background-color: var(--color-midMaroon);
+  padding: 4rem 2rem;
+}
+
+.donor-wall-inner{
+
+ display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  justify-content: center;
+  text-align: center;
+gap: 2rem;
+}
+
+.donor-wall-inner p a{
+text-decoration: none;
+color: var(--color-cream);
+}
+
+.donor-grid{
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.donor-card{
+background: var(--color-dustyRose);
+padding: 3rem 3rem;
+border-radius: 8px;
+text-align: center;
+}
+
+.donor-quote{
+color: var(--color-warmGold);
+font-size: var(--font-size-display);
+display: block;
+}
+
+.donor-name{
+color: var(--color-grey);
+font-size: var(--font-size-caption);
+font-style: italic;
 }
