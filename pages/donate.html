@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Donate — O'Conor Home</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Open+Sans:wght@400;600&display=swap"
+        rel="stylesheet" />
+    <link rel="stylesheet" href="../src/styles/main.css" />
+</head>
+<body>
+
+    <header>
+        <nav>
+            <ul>
+                <li><a href="../index.html">Home</a></li>
+                <li><a href="stories.html">Stories</a></li>
+                <li><a href="virtual-tour.html">Virtual Tours</a></li>
+                <li><a href="events.html">Events</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="availability.html">Availability</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+      <main>
+  <section class="donate-section">
+    <div class="donate-inner">
+      <h1>Make a Donation</h1>
+      <p>Your generosity helps us continue caring for the people of Westport.</p>
+
+      <form id="donation-form">
+        <div class="form-group">
+          <label for="amount">Donation Amount (NZD)</label>
+          <input type="number" id="amount" min="1" placeholder="Enter amount" required />
+        </div>
+
+        <div class="form-group">
+          <label for="donor-name">Your Name (optional)</label>
+          <input type="text" id="donor-name" placeholder="Your name" />
+        </div>
+
+        <div class="form-group">
+          <label for="donor-message">Message (optional)</label>
+          <textarea id="donor-message" placeholder="Leave a message..." rows="3"></textarea>
+        </div>
+
+        <div class="form-group checkbox-group">
+          <input type="checkbox" id="consent" />
+          <label for="consent">I consent to my name and message being displayed on the donor wall</label>
+        </div>
+
+        <!-- Stripe card element will be injected here -->
+        <div id="card-element"></div>
+        <div id="card-errors"></div>
+
+        <button type="submit" id="submit-btn">Donate Now</button>
+      </form>
+    </div>
+  </section>
+</main>
+    </main>
+
+    <footer>
+        <div class="footer-inner">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>O'Conor Home</h3>
+                    <p>Caring for the people of Westport since 1900. This is your home — not ours.</p>
+                </div>
+                <div class="footer-col">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="stories.html">Stories</a></li>
+                        <li><a href="virtual-tour.html">Virtual Tour</a></li>
+                        <li><a href="events.html">Events</a></li>
+                        <li><a href="faq.html">FAQ</a></li>
+                        <li><a href="availability.html">Availability</a></li>
+                        <li><a href="contact.html">Contact</a></li>
+                        <li><a href="donate.html">Donate</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Contact</h3>
+                    <!-- TODO: Replace with real contact details -->
+                    <p>123 Placeholder Street<br>Westport, New Zealand</p>
+                    <p>Phone: 03 xxx xxxx</p>
+                    <p>Email: info@oconorhome.nz</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2025 O'Conor Home. All rights reserved.</p>
+                <p>Registered Charity CC39255</p>
+            </div>
+        </div>
+    </footer>
+<script type="module" src="../src/scripts/donate.ts"></script>
+</body>
+</html>
