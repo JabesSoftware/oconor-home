@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin — Events Manager — O'Conor Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../src/styles/main.css" />
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">
+      <a href="../index.html">O'Conor Home</a>
+    </div>
+    <button id="logout-btn">Log Out</button>
+  </header>
+
+  <main>
+    <section class="admin-section">
+      <div class="admin-inner">
+
+        <div class="admin-header">
+          <h1>Events Manager</h1>
+          <p>Add, edit, and delete upcoming events. Changes appear on the website immediately.</p>
+        </div>
+
+        <!-- Add Event Form -->
+        <div class="admin-card">
+          <h2>Add New Event</h2>
+          <form id="add-event-form">
+
+            <div class="form-group">
+              <label for="event-title">Event Title</label>
+              <input type="text" id="event-title" placeholder="e.g. Morning Tea with Families" required />
+            </div>
+
+            <div class="admin-form-row">
+              <div class="form-group">
+                <label for="event-date">Date</label>
+                <input type="date" id="event-date" required />
+              </div>
+              <div class="form-group">
+                <label for="event-time">Time (optional)</label>
+                <input type="text" id="event-time" placeholder="e.g. 10:00am" />
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="event-location">Location (optional)</label>
+              <input type="text" id="event-location" placeholder="e.g. Main Lounge" />
+            </div>
+
+            <div class="form-group">
+              <label for="event-description">Description (optional)</label>
+              <textarea id="event-description" rows="3" placeholder="Brief description of the event..."></textarea>
+            </div>
+
+            <div id="add-event-error"></div>
+            <button type="submit" id="add-event-btn">Add Event</button>
+
+          </form>
+        </div>
+
+        <!-- Events List -->
+        <div class="admin-card">
+          <h2>Current Events</h2>
+          <div id="events-list">
+            <p class="admin-loading">Loading events...</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="../src/scripts/admin-events.ts"></script>
+
+</body>
+</html>

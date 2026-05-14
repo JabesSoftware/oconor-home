@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin Login — O'Conor Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../src/styles/main.css" />
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">
+      <a href="../index.html">O'Conor Home</a>
+    </div>
+  </header>
+
+  <main>
+    <section class="admin-login-section">
+      <div class="admin-login-inner">
+        <h1>Admin Login</h1>
+        <p>This area is restricted to O'Conor Home staff.</p>
+
+        <form id="login-form">
+          <div class="form-group">
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter admin password" required />
+          </div>
+          <div id="login-error"></div>
+          <button type="submit">Login</button>
+        </form>
+
+      </div>
+    </section>
+  </main>
+
+  <script type="module" src="../src/scripts/admin-login.ts"></script>
+
+</body>
+</html>

@@ -934,3 +934,194 @@ footer {
   margin-bottom: 1rem;
 }
 
+/* ─── Admin ──────────────────────────────────────────── */
+
+.admin-login-section {
+  background-color: var(--color-paleRose);
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  padding: 4rem 2rem;
+}
+
+.admin-login-inner {
+  max-width: 400px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.admin-login-inner h1 {
+  color: var(--color-primaryMaroon);
+  font-size: var(--font-size-h1);
+  margin-bottom: 0.5rem;
+}
+
+.admin-login-inner p {
+  color: var(--color-grey);
+  margin-bottom: 2rem;
+}
+
+#login-error {
+  color: red;
+  font-size: var(--font-size-caption);
+  margin-bottom: 1rem;
+}
+
+/* ─── Admin Events ───────────────────────────────────── */
+
+.admin-section {
+  background-color: var(--color-paleRose);
+  min-height: 80vh;
+  padding: 4rem 2rem;
+}
+
+.admin-inner {
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+.admin-header h1 {
+  color: var(--color-primaryMaroon);
+  font-size: var(--font-size-h1);
+  margin-bottom: 0.5rem;
+}
+
+.admin-header p {
+  color: var(--color-grey);
+  margin-bottom: 0;
+}
+
+.admin-card {
+  background-color: var(--color-cream);
+  border-radius: 8px;
+  padding: 2rem;
+  border: 1px solid var(--color-midRose);
+}
+
+.admin-card h2 {
+  color: var(--color-primaryMaroon);
+  margin-bottom: 1.5rem;
+}
+
+.admin-form-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+#add-event-error {
+  color: red;
+  font-size: var(--font-size-caption);
+  margin-bottom: 1rem;
+}
+
+.admin-loading {
+  color: var(--color-grey);
+}
+
+.event-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 1rem;
+  border-bottom: 1px solid var(--color-midRose);
+  gap: 1rem;
+}
+
+.event-list-item:last-child {
+  border-bottom: none;
+}
+
+.event-list-item-details h3 {
+  color: var(--color-primaryMaroon);
+  font-size: var(--font-size-body);
+  margin-bottom: 0.25rem;
+}
+
+.event-list-item-details p {
+  color: var(--color-grey);
+  font-size: var(--font-size-caption);
+  margin-bottom: 0;
+}
+
+.event-delete-btn {
+  background-color: transparent;
+  color: red;
+  border: 1px solid red;
+  padding: 0.4rem 0.75rem;
+  font-size: var(--font-size-caption);
+  border-radius: 4px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.event-delete-btn:hover {
+  background-color: red;
+  color: white;
+}
+
+#logout-btn {
+  background-color: transparent;
+  color: var(--color-cream);
+  border: 1px solid var(--color-cream);
+  padding: 0.4rem 1rem;
+  font-size: var(--font-size-caption);
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+#logout-btn:hover {
+  background-color: rgba(250, 245, 239, 0.2);
+}
+
+/* ─── Events Page ────────────────────────────────────── */
+
+.events-section {
+  background-color: var(--color-paleRose);
+  padding: 6rem 2rem;
+}
+
+.events-inner {
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.event-card {
+  background-color: var(--color-cream);
+  border: 1px solid var(--color-midRose);
+  border-radius: 8px;
+  padding: 2rem;
+  margin-bottom: 1.5rem;
+}
+
+.event-card h3 {
+  color: var(--color-primaryMaroon);
+  margin-bottom: 0.5rem;
+}
+
+.event-meta {
+  color: var(--color-grey);
+  font-size: var(--font-size-caption);
+  margin-bottom: 0.75rem;
+}
+
+.event-description {
+  color: var(--color-nearBlack);
+  margin-bottom: 0;
+}
+
+.no-events {
+  color: var(--color-grey);
+  text-align: center;
+  padding: 3rem;
+}
+
+
