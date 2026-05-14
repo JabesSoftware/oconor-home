@@ -1,70 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Donors — O'Conor Home</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Open+Sans:wght@400;600&display=swap"
-        rel="stylesheet" />
-    <link rel="stylesheet" href="../src/styles/main.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Our generous donors — O'Conor Home, Westport." />
+  <title>Our Donors — O'Conor Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../src/styles/main.css" />
 </head>
+
 <body>
 
-    <header>
-        <nav>
-            <ul>
-                <li><a href="../index.html">Home</a></li>
-                <li><a href="stories.html">Stories</a></li>
-                <li><a href="virtual-tour.html">Virtual Tours</a></li>
-                <li><a href="events.html">Events</a></li>
-                <li><a href="faq.html">FAQ</a></li>
-                <li><a href="availability.html">Availability</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="donate.html">Donate</a></li>
-            </ul>
-        </nav>
-    </header>
+  <header>
+    <div class="logo">
+      <a href="../index.html">O'Conor Home</a>
+    </div>
+    <nav aria-label="Main navigation">
+      <ul>
+        <li><a href="stories.html">Stories</a></li>
+        <li><a href="virtual-tour.html">Virtual Tour</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="availability.html">Availability</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="donate.html">Donate</a></li>
+      </ul>
+    </nav>
+  </header>
 
-    <main>
-        <!-- PAGE CONTENT HERE -->
-    </main>
+  <main>
 
-    <footer>
-        <div class="footer-inner">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <h3>O'Conor Home</h3>
-                    <p>Caring for the people of Westport since 1900. This is your home — not ours.</p>
-                </div>
-                <div class="footer-col">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="stories.html">Stories</a></li>
-                        <li><a href="virtual-tour.html">Virtual Tour</a></li>
-                        <li><a href="events.html">Events</a></li>
-                        <li><a href="faq.html">FAQ</a></li>
-                        <li><a href="availability.html">Availability</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="donate.html">Donate</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h3>Contact</h3>
-                    <!-- TODO: Replace with real contact details -->
-                    <p>123 Placeholder Street<br>Westport, New Zealand</p>
-                    <p>Phone: 03 xxx xxxx</p>
-                    <p>Email: info@oconorhome.nz</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2025 O'Conor Home. All rights reserved.</p>
-                <p>Registered Charity CC39255</p>
-            </div>
+    <section class="page-hero">
+      <div class="page-hero-inner">
+        <h1>Those Who Give</h1>
+        <p>We are deeply grateful to everyone who has supported O'Conor Home.</p>
+      </div>
+    </section>
+
+    <section class="donors-section">
+      <div class="donors-inner">
+        <p class="donors-intro">The following donors have generously given their permission to be recognised here. Their support makes a real difference to the lives of our residents.</p>
+        <div id="all-donors-grid" class="donor-grid">
+          <p class="admin-loading">Loading donors...</p>
         </div>
-    </footer>
+        <div class="donors-cta">
+          <h2>Join Them</h2>
+          <p>Your donation — whatever its size — helps us continue caring for Westport's elders.</p>
+          <a href="donate.html" class="btn-primary">Make a Donation</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>O'Conor Home</h3>
+          <p>Caring for the people of Westport since 1900. This is your home — not ours.</p>
+        </div>
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="stories.html">Stories</a></li>
+            <li><a href="virtual-tour.html">Virtual Tour</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="availability.html">Availability</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="donate.html">Donate</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Contact</h3>
+          <p>123 Placeholder Street<br>Westport, New Zealand</p>
+          <p>Phone: 03 xxx xxxx</p>
+          <p>Email: info@oconorhome.nz</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2025 O'Conor Home. All rights reserved.</p>
+        <p>Registered Charity CC39255</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="../src/scripts/donors.ts"></script>
 
 </body>
 </html>

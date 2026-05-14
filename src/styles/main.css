@@ -1124,4 +1124,280 @@ footer {
   padding: 3rem;
 }
 
+/* ─── Availability ───────────────────────────────────── */
+
+.availability-section {
+  background-color: var(--color-paleRose);
+  padding: 6rem 2rem;
+}
+
+.availability-inner {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.availability-note {
+  color: var(--color-grey);
+  text-align: center;
+  font-style: italic;
+}
+
+.availability-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.availability-card {
+  background-color: var(--color-cream);
+  border-radius: 8px;
+  padding: 2rem;
+  border: 1px solid var(--color-midRose);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.availability-card h3 {
+  color: var(--color-primaryMaroon);
+  margin-bottom: 0;
+}
+
+.availability-card p {
+  color: var(--color-nearBlack);
+  margin-bottom: 0;
+}
+
+.availability-count {
+  font-weight: 600;
+  color: var(--color-primaryMaroon) !important;
+}
+
+.availability-status {
+  display: inline-block;
+  padding: 0.25rem 0.75rem;
+  border-radius: 99px;
+  font-size: var(--font-size-caption);
+  font-weight: 600;
+  width: fit-content;
+}
+
+.availability-card--available .availability-status {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.availability-card--limited .availability-status {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.availability-card--waitlist .availability-status {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.availability-cta {
+  text-align: center;
+  padding: 3rem;
+  background-color: var(--color-cream);
+  border-radius: 8px;
+  border: 1px solid var(--color-midRose);
+}
+
+.availability-cta h2 {
+  color: var(--color-primaryMaroon);
+  margin-bottom: 1rem;
+}
+
+/* ─── Virtual Tour ───────────────────────────────────── */
+
+.tour-section {
+  background-color: var(--color-paleRose);
+  padding: 6rem 2rem;
+}
+
+.tour-video-section {
+  background-color: var(--color-sectionBeige);
+  padding: 6rem 2rem;
+}
+
+.tour-inner {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+.tour-inner h2 {
+  color: var(--color-primaryMaroon);
+  margin-bottom: 2rem;
+}
+
+.tour-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+}
+
+.tour-item img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  border-radius: 8px;
+  display: block;
+}
+
+.tour-caption {
+  color: var(--color-grey);
+  font-size: var(--font-size-caption);
+  text-align: center;
+  margin-top: 0.5rem;
+  margin-bottom: 0;
+}
+
+.video-placeholder {
+  background-color: var(--color-cream);
+  border: 1px solid var(--color-midRose);
+  border-radius: 8px;
+  padding: 4rem 2rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.video-placeholder p {
+  color: var(--color-grey);
+  margin-bottom: 0;
+}
+
+/* ─── Project Overview ───────────────────────────────── */
+
+.project-section {
+  background-color: var(--color-paleRose);
+  padding: 6rem 2rem;
+}
+
+.project-inner {
+  max-width: 900px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.project-intro h2,
+.project-funding h2,
+.project-why h2,
+.project-cta h2 {
+  color: var(--color-primaryMaroon);
+  margin-bottom: 1rem;
+}
+
+.project-stats-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.project-stat {
+  background-color: var(--color-primaryMaroon);
+  border-radius: 8px;
+  padding: 1.5rem;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.project-stat-number {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-h1);
+  color: var(--color-warmGold);
+}
+
+.project-stat-label {
+  font-size: var(--font-size-caption);
+  color: var(--color-midRose);
+}
+
+.funding-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.funding-item {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+}
+
+.funding-icon {
+  font-size: 1.5rem;
+  margin-top: 0.25rem;
+}
+
+.funding-item h3 {
+  color: var(--color-primaryMaroon);
+  margin-bottom: 0.25rem;
+}
+
+.funding-item p {
+  margin-bottom: 0;
+}
+
+.project-cta {
+  text-align: center;
+}
+
+.project-cta .btn-group {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 1.5rem;
+}
+
+/* ─── Donors Page ────────────────────────────────────── */
+
+.donors-section {
+  background-color: var(--color-paleRose);
+  padding: 6rem 2rem;
+}
+
+.donors-inner {
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+
+.donors-intro {
+  color: var(--color-grey);
+  text-align: center;
+  font-style: italic;
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+.donors-cta {
+  text-align: center;
+  padding: 3rem;
+  background-color: var(--color-cream);
+  border-radius: 8px;
+  border: 1px solid var(--color-midRose);
+}
+
+.donors-cta h2 {
+  color: var(--color-primaryMaroon);
+  margin-bottom: 1rem;
+}
 
