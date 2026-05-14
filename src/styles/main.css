@@ -162,6 +162,11 @@ button:hover {
   align-items: center;
   text-align: center;
   padding: 2rem;
+    background-image: 
+    linear-gradient(rgba(107, 30, 46, 0.7), rgba(107, 30, 46, 0.7)),
+    url('https://picsum.photos/1920/1080');
+  background-size: cover;
+  background-position: center;
 }
 
 .main-header h1 {
@@ -599,4 +604,164 @@ footer {
   color: red;
   font-size: var(--font-size-caption);
   margin-bottom: 1rem;
+}
+
+.logo a {
+  font-family: var(--font-heading);
+  font-size: var(--font-size-h2);
+  color: var(--color-warmGold);
+  text-decoration: none;
+  letter-spacing: 0.05em;
+}
+
+/* ─── Page Hero ──────────────────────────────────────── */
+
+.page-hero {
+  background-color: var(--color-primaryMaroon);
+  padding: 6rem 2rem;
+}
+
+.page-hero-inner {
+  max-width: 800px;
+  width: 100%;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.page-hero h1 {
+  color: var(--color-cream);
+  font-size: var(--font-size-h1);
+  margin-bottom: 1rem;
+}
+
+.page-hero p {
+  color: var(--color-midRose);
+  margin-bottom: 0;
+}
+
+/* ─── Stories Grid ───────────────────────────────────── */
+
+.stories {
+  background-color: var(--color-paleRose);
+  padding: 6rem 2rem;
+}
+
+.stories-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.story-card {
+  background-color: var(--color-cream);
+  border-radius: 8px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.story-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(107, 30, 46, 0.15);
+}
+
+.story-card-image img {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  display: block;
+}
+
+.story-card-content {
+  padding: 1.5rem;
+}
+
+.story-card-content h3 {
+  color: var(--color-primaryMaroon);
+  margin-bottom: 0.75rem;
+}
+
+.story-card-content .story-blurb {
+  color: var(--color-grey);
+  margin-bottom: 1rem;
+}
+
+.story-read-more {
+  background-color: transparent;
+  color: var(--color-primaryMaroon);
+  border: 2px solid var(--color-primaryMaroon);
+  padding: 0.5rem 1.25rem;
+  font-size: var(--font-size-caption);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.story-read-more:hover {
+  background-color: var(--color-primaryMaroon);
+  color: var(--color-cream);
+}
+
+/* ─── Modal ──────────────────────────────────────────── */
+
+.modal-overlay {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(30, 10, 16, 0.85);
+  z-index: 1000;
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal {
+  background-color: var(--color-cream);
+  border-radius: 8px;
+  padding: 3rem;
+  max-width: 700px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.modal-close {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: transparent;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: var(--color-grey);
+}
+
+.modal-close:hover {
+  color: var(--color-primaryMaroon);
+  background: transparent;
+}
+
+.modal-image {
+  width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-radius: 4px;
+  margin-bottom: 1.5rem;
+}
+
+.modal-title {
+  color: var(--color-primaryMaroon);
+  margin-bottom: 1rem;
+}
+
+.modal-body {
+  color: var(--color-nearBlack);
+  line-height: 1.8;
 }
