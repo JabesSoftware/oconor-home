@@ -76,6 +76,66 @@
 
       </div>
     </section>
+
+    <!-- Newsletter Upload -->
+<div class="admin-card">
+  <h2>Upload Newsletter</h2>
+  <form id="upload-newsletter-form">
+
+    <div class="form-group">
+      <label for="newsletter-title">Newsletter Title</label>
+      <input type="text" id="newsletter-title" placeholder="e.g. Winter 2025 Newsletter" required />
+    </div>
+
+    <div class="form-group">
+      <label for="newsletter-date">Date</label>
+      <input type="date" id="newsletter-date" required />
+    </div>
+
+    <div class="form-group">
+      <label for="newsletter-pdf">PDF File</label>
+      <input type="file" id="newsletter-pdf" accept=".pdf" required />
+    </div>
+
+    <div id="upload-newsletter-error"></div>
+    <div id="upload-progress" style="display:none">
+      <p class="admin-loading">Uploading...</p>
+    </div>
+    <button type="submit" id="upload-newsletter-btn">Upload Newsletter</button>
+
+  </form>
+</div>
+
+<!-- Newsletters List -->
+<div class="admin-card">
+  <h2>Current Newsletters</h2>
+  <div id="newsletters-list">
+    <p class="admin-loading">Loading newsletters...</p>
+  </div>
+</div>
+
+<!-- Video Upload -->
+<div class="admin-card">
+  <h2>Virtual Tour Video</h2>
+  <p>Upload a single video for the virtual tour page. This will replace any existing video.</p>
+  <form id="upload-video-form">
+
+    <div class="form-group">
+      <label for="video-file">Video File (MP4 recommended)</label>
+      <input type="file" id="video-file" accept="video/*" required />
+    </div>
+
+    <div id="upload-video-error"></div>
+    <div id="upload-video-progress" style="display:none">
+      <p class="admin-loading">Uploading video — this may take a moment...</p>
+    </div>
+    <button type="submit" id="upload-video-btn">Upload Video</button>
+
+  </form>
+
+  <div id="current-video" style="margin-top:1.5rem">
+    <p class="admin-loading">Checking for existing video...</p>
+
   </main>
 
   <script type="module" src="../src/scripts/admin-events.ts"></script>

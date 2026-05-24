@@ -89,3 +89,177 @@ form.addEventListener('submit', async (e) => {
 });
 
 loadEvents();
+
+
+// Newsletter upload
+const uploadForm = document.getElementById('upload-newsletter-form') as HTMLFormElement;
+const newsletterTitle = document.getElementById('newsletter-title') as HTMLInputElement;
+const newsletterDate = document.getElementById('newsletter-date') as HTMLInputElement;
+const newsletterPdf = document.getElementById('newsletter-pdf') as HTMLInputElement;
+const uploadError = document.getElementById('upload-newsletter-error') as HTMLDivElement;
+const uploadProgress = document.getElementById('upload-progress') as HTMLDivElement;
+
+async function loadNewsletters() {
+  const { data, error } = await supabase
+    .from('newsletters')
+    .select('*')
+    .order('date', { ascending: false });
+
+  const list = document.getElementById('newsletters-list') as HTMLDivElement;
+
+  if (error || !data || data.length === 0) {
+    list.innerHTML = '<p class="admin-loading">No newsletters yet. Upload one above.</p>';
+    return;
+  }
+
+  list.innerHTML = data.map(newsletter => `
+    <div class="event-list-item">
+      <div class="event-list-item-details">
+        <h3>${newsletter.title}</h3>
+        <p>${new Date(newsletter.date).toLocaleDateString('en-NZ', { year: 'numeric', month: 'long' })}</p>
+      </div>
+      <div style="display:flex;gap:0.5rem">
+        <a href="${newsletter.pdf_url}" target="_blank" class="btn-primary" style="font-size:var(--font-size-caption);padding:0.4rem 0.75rem">View</a>
+        <button class="newsletter-delete-btn event-delete-btn" data-id="${newsletter.id}">Delete</button>
+      </div>
+    </div>
+  `).join('');
+
+  document.querySelectorAll('.newsletter-delete-btn').forEach((btn) => {
+    btn.addEventListener('click', async () => {
+      const id = (btn as HTMLElement).dataset['id'];
+      if (confirm('Are you sure you want to delete this newsletter?')) {
+        await supabase.from('newsletters').delete().eq('id', id);
+        loadNewsletters();
+      }
+    });
+  });
+}
+
+uploadForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  uploadError.textContent = '';
+  uploadProgress.style.display = 'block';
+
+  const file = newsletterPdf.files?.[0];
+  if (!file) {
+    uploadError.textContent = 'Please select a PDF file.';
+    uploadProgress.style.display = 'none';
+    return;
+  }
+
+  // Upload PDF to Supabase Storage
+  const fileName = `${Date.now()}-${file.name}`;
+  const { data: uploadData, error: uploadErr } = await supabase.storage
+    .from('newsletters')
+    .upload(fileName, file);
+
+  if (uploadErr) {
+    uploadError.textContent = 'Error uploading file. Please try again.';
+    uploadProgress.style.display = 'none';
+    console.log(uploadErr);
+    return;
+  }
+
+  // Get public URL
+  const { data: urlData } = supabase.storage
+    .from('newsletters')
+    .getPublicUrl(fileName);
+
+  // Save to database
+  const { error: dbError } = await supabase.from('newsletters').insert({
+    title: newsletterTitle.value,
+    date: newsletterDate.value,
+    pdf_url: urlData.publicUrl,
+  });
+
+  if (dbError) {
+    uploadError.textContent = 'Error saving newsletter. Please try again.';
+    uploadProgress.style.display = 'none';
+    console.log(dbError);
+    return;
+  }
+
+  uploadProgress.style.display = 'none';
+  uploadForm.reset();
+  loadNewsletters();
+});
+
+loadNewsletters();
+
+// Video upload
+const videoForm = document.getElementById('upload-video-form') as HTMLFormElement;
+const videoFile = document.getElementById('video-file') as HTMLInputElement;
+const videoError = document.getElementById('upload-video-error') as HTMLDivElement;
+const videoProgress = document.getElementById('upload-video-progress') as HTMLDivElement;
+const currentVideo = document.getElementById('current-video') as HTMLDivElement;
+
+async function loadCurrentVideo() {
+  const { data } = await supabase.storage.from('videos').list();
+  
+  if (!data || data.length === 0) {
+    currentVideo.innerHTML = '<p class="admin-loading">No video uploaded yet.</p>';
+    return;
+  }
+
+  const video = data[0];
+  const { data: urlData } = supabase.storage.from('videos').getPublicUrl(video.name);
+
+  currentVideo.innerHTML = `
+    <div class="event-list-item">
+      <div class="event-list-item-details">
+        <h3>Current Video</h3>
+        <p>${video.name}</p>
+      </div>
+      <div style="display:flex;gap:0.5rem">
+        <a href="${urlData.publicUrl}" target="_blank" class="btn-primary" style="font-size:var(--font-size-caption);padding:0.4rem 0.75rem">Preview</a>
+        <button class="event-delete-btn" id="delete-video-btn" data-name="${video.name}">Delete</button>
+      </div>
+    </div>
+  `;
+
+  document.getElementById('delete-video-btn')?.addEventListener('click', async () => {
+    if (confirm('Are you sure you want to delete the current video?')) {
+      await supabase.storage.from('videos').remove([video.name]);
+      loadCurrentVideo();
+    }
+  });
+}
+
+videoForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  videoError.textContent = '';
+  videoProgress.style.display = 'block';
+
+  const file = videoFile.files?.[0];
+  if (!file) {
+    videoError.textContent = 'Please select a video file.';
+    videoProgress.style.display = 'none';
+    return;
+  }
+
+  // Delete existing video first
+  const { data: existing } = await supabase.storage.from('videos').list();
+  if (existing && existing.length > 0) {
+    await supabase.storage.from('videos').remove(existing.map(f => f.name));
+  }
+
+  // Upload new video
+  const fileName = `tour-video-${Date.now()}.mp4`;
+  const { error: uploadErr } = await supabase.storage
+    .from('videos')
+    .upload(fileName, file);
+
+  if (uploadErr) {
+    videoError.textContent = 'Error uploading video. Please try again.';
+    videoProgress.style.display = 'none';
+    console.log(uploadErr);
+    return;
+  }
+
+  videoProgress.style.display = 'none';
+  videoForm.reset();
+  loadCurrentVideo();
+});
+
+loadCurrentVideo();

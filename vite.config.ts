@@ -18,6 +18,7 @@ export default defineConfig({
         donors: 'pages/donors.html',
         adminLogin: 'pages/admin-login.html',
         adminEvents: 'pages/admin-events.html',
+        news: 'pages/news.html',
       }
     }
   }
