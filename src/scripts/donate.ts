@@ -66,6 +66,7 @@ document.querySelectorAll('.tier-card').forEach((card) => {
 const form = document.getElementById('donation-form') as HTMLFormElement;
 const amountInput = document.getElementById('amount') as HTMLInputElement;
 const donorNameInput = document.getElementById('donor-name') as HTMLInputElement;
+const donorEmailInput = document.getElementById('donor-email') as HTMLInputElement;
 const donorMessageInput = document.getElementById('donor-message') as HTMLTextAreaElement;
 const consentCheckbox = document.getElementById('consent') as HTMLInputElement;
 const cardErrors = document.getElementById('card-errors') as HTMLDivElement;
@@ -112,15 +113,33 @@ console.log('Client secret:', clientSecret);
     cardErrors.textContent = result.error.message ?? 'Payment failed';
   } else {
     // Step 3: Save to Supabase
-    await supabase.from('donations').insert({
-      amount,
-      donor_name: donorName || null,
-      donor_message: donorMessage || null,
-      consent_to_display: consentToDisplay,
-      stripe_payment_id: result.paymentIntent.id,
-    });
+  await supabase.from('donations').insert({
+  amount,
+  donor_name: donorName || null,
+  donor_message: donorMessage || null,
+  consent_to_display: consentToDisplay,
+  stripe_payment_id: result.paymentIntent.id,
+  donor_email: donorEmailInput.value || null,
+});
 
     // Step 4: Show success
     form.innerHTML = '<p>Thank you for your donation! 💛</p>';
   }
+
+  // Send thank you email
+await fetch(
+  `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-donation-email`,
+  {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLIC}`,
+    },
+    body: JSON.stringify({
+  donorName: donorName || null,
+  donorEmail: donorEmailInput.value || null,
+  amount,
+}),
+  }
+);
 });
