@@ -58,12 +58,68 @@
           <label for="consent">I consent to my name and message being displayed on the donor wall</label>
         </div>
 
+
+        <div class="campaign-display">
+  <!-- TODO: Replace placeholder data with real GiveALittle API data -->
+  <img 
+    src="https://picsum.photos/600/300?random=20" 
+    alt="O'Conor Home building project"
+    class="campaign-image"
+  />
+  
+  <div class="campaign-details">
+    <h2>Help Build Our New Wing</h2>
+    <p>We're building a new 24-bed hospital wing so Buller's elders can keep receiving care close to home.</p>
+    
+    <div class="campaign-progress">
+      <div class="campaign-progress-bar">
+        <div class="campaign-progress-fill" style="width: 29%"></div>
+      </div>
+      <div class="campaign-progress-stats">
+        <span class="campaign-raised">$856,000 raised</span>
+        <span class="campaign-target">of $2,900,000 goal</span>
+      </div>
+    </div>
+
+    <div class="campaign-stats-row">
+      <div class="campaign-stat">
+        <span class="campaign-stat-number">127</span>
+        <span class="campaign-stat-label">Supporters</span>
+      </div>
+      <div class="campaign-stat">
+        <span class="campaign-stat-number">29%</span>
+        <span class="campaign-stat-label">Funded</span>
+      </div>
+      <div class="campaign-stat">
+        <span class="campaign-stat-number">89</span>
+        <span class="campaign-stat-label">Days to go</span>
+      </div>
+    </div>
+  </div>
+</div>
+
         <!-- Stripe card element will be injected here -->
         <div id="card-element"></div>
         <div id="card-errors"></div>
 
         <button type="submit" id="submit-btn">Donate Now</button>
+      
       </form>
+      <div class="givealittle-section">
+  <div class="givealittle-divider">
+    <span>or donate via</span>
+  </div>
+  <a 
+    href="https://givealittle.co.nz/cause/oconorhome" 
+    target="_blank" 
+    rel="noopener noreferrer"
+    class="givealittle-btn"
+  >
+    <!-- TODO: Replace href with real GiveALittle URL when available -->
+    Donate via GiveALittle
+  </a>
+  <p class="givealittle-note">GiveALittle is a New Zealand crowdfunding platform. Donations made there are processed separately.</p>
+</div>
     </div>
   </section>
 </main>
