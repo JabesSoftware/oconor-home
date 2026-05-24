@@ -15,22 +15,43 @@ const formErrors = document.getElementById('form-errors') as HTMLDivElement;
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
 
+  const name = nameInput.value;
+  const email = emailInput.value;
+  const phone = phoneInput.value || null;
+  const message = messageInput.value;
+
+  // Step 1: Save to Supabase
   const { error } = await supabase.from('enquiries').insert({
-    name: nameInput.value,
-    email: emailInput.value,
-    phone: phoneInput.value || null,
-    message: messageInput.value,
+    name,
+    email,
+    phone,
+    message,
   });
 
   if (error) {
     console.log('Supabase error:', error);
     formErrors.textContent = 'Something went wrong. Please try again.';
-  } else {
-    form.innerHTML = `
-      <div class="form-success">
-        <h3>Thank you for getting in touch!</h3>
-        <p>We'll be in contact with you shortly.</p>
-      </div>
-    `;
+    return;
   }
+
+  // Step 2: Send email notification
+  await fetch(
+    `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-enquiry-email`,
+    {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLIC}`,
+      },
+      body: JSON.stringify({ name, email, phone, message }),
+    }
+  );
+
+  // Step 3: Show success
+  form.innerHTML = `
+    <div class="form-success">
+      <h3>Thank you for getting in touch!</h3>
+      <p>We'll be in contact with you shortly.</p>
+    </div>
+  `;
 });
