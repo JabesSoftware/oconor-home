@@ -4,8 +4,8 @@ const resendApiKey = Deno.env.get('RESEND_API_KEY')!;
 
 const FROM_EMAIL = 'onboarding@resend.dev';
 // TODO: Replace with real staff emails
-const GENERAL_STAFF_EMAIL = 'gabescallaghan@gmail.com';
-const LARGE_DONATION_STAFF_EMAIL = 'gabescallaghan@gmail.com';
+const GENERAL_STAFF_EMAIL = 'donation@oconorhome.co.nz';
+const LARGE_DONATION_STAFF_EMAIL = 'garryhowd@gmail.com';
 const LARGE_DONATION_THRESHOLD = 1000;
 
 Deno.serve(async (req) => {

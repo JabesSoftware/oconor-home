@@ -162,9 +162,9 @@ button:hover {
   align-items: center;
   text-align: center;
   padding: 2rem;
-    background-image: 
+   background-image: 
     linear-gradient(rgba(107, 30, 46, 0.7), rgba(107, 30, 46, 0.7)),
-    url('https://picsum.photos/1920/1080');
+    url('../assets/images/hero.jpg');
   background-size: cover;
   background-position: center;
 }

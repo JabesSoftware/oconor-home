@@ -14,10 +14,10 @@ const supabase = createClient(
 
 // Donation tiers
 const donationTiers = [
-  { id: 1, amount: 10, name: "A Brick", image: "https://picsum.photos/300/200?random=30", description: "Add your name to our donor wall." },
-  { id: 2, amount: 25, name: "A Cushion", image: "https://picsum.photos/300/200?random=31", description: "Help furnish a resident's room." },
-  { id: 3, amount: 50, name: "A Plant", image: "https://picsum.photos/300/200?random=32", description: "Brighten our garden spaces." },
-  { id: 4, amount: 100, name: "A Chair", image: "https://picsum.photos/300/200?random=33", description: "Provide comfort for a resident." },
+  { id: 1, amount: 10, name: "A Brick", image: "../src/assets/images/brick_thumb.png", description: "Add your name to our donor wall." },
+  { id: 2, amount: 25, name: "A Brick with a name", image: "https://picsum.photos/300/200?random=31", description: "Help furnish a resident's room." },
+  { id: 3, amount: 50, name: "A Plant", image: "../src/assets/images/plant_thumb.png", description: "Brighten our garden spaces." },
+  { id: 4, amount: 100, name: "A Chair", image: "../src/assets/images/diningchair_thumb.png", description: "Provide comfort for a resident." },
   { id: 5, amount: 250, name: "A Bookshelf", image: "https://picsum.photos/300/200?random=34", description: "Stock our library with books and games." },
   { id: 6, amount: 500, name: "A Bed", image: "https://picsum.photos/300/200?random=35", description: "Equip a room for a new resident." },
   { id: 7, amount: 1000, name: "A Bathroom Fitout", image: "https://picsum.photos/300/200?random=36", description: "Fully fit out an accessible bathroom." },

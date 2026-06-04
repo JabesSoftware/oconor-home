@@ -3,7 +3,7 @@ import "@supabase/functions-js/edge-runtime.d.ts"
 const resendApiKey = Deno.env.get('RESEND_API_KEY')!;
 
 // TODO: Replace with real staff email address
-const STAFF_EMAIL = 'gabescallaghan@gmail.com';
+const STAFF_EMAIL = 'info@oconorhome.co.nz';
 const FROM_EMAIL = 'onboarding@resend.dev';
 
 Deno.serve(async (req) => {
