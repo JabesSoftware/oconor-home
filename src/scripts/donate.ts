@@ -14,21 +14,25 @@ const supabase = createClient(
 
 // Donation tiers
 const donationTiers = [
-  { id: 1, amount: 10, name: "A Brick", image: "../src/assets/images/brick_thumb.png", description: "Add your name to our donor wall." },
-  { id: 2, amount: 25, name: "A Brick with a name", image: "https://picsum.photos/300/200?random=31", description: "Help furnish a resident's room." },
-  { id: 3, amount: 50, name: "A Plant", image: "../src/assets/images/plant_thumb.png", description: "Brighten our garden spaces." },
-  { id: 4, amount: 100, name: "A Chair", image: "../src/assets/images/diningchair_thumb.png", description: "Provide comfort for a resident." },
-  { id: 5, amount: 250, name: "A Bookshelf", image: "https://picsum.photos/300/200?random=34", description: "Stock our library with books and games." },
-  { id: 6, amount: 500, name: "A Bed", image: "https://picsum.photos/300/200?random=35", description: "Equip a room for a new resident." },
-  { id: 7, amount: 1000, name: "A Bathroom Fitout", image: "https://picsum.photos/300/200?random=36", description: "Fully fit out an accessible bathroom." },
-  { id: 8, amount: 2500, name: "A Lounge Suite", image: "https://picsum.photos/300/200?random=37", description: "Furnish a communal lounge area." },
-  { id: 9, amount: 5000, name: "A Nurse Station", image: "https://picsum.photos/300/200?random=38", description: "Equip a nursing station for our care team." },
-  { id: 10, amount: 10000, name: "A Dementia Suite", image: "https://picsum.photos/300/200?random=39", description: "Fully fit out a dementia care suite." },
-  { id: 11, amount: 25000, name: "A Ward", image: "https://picsum.photos/300/200?random=40", description: "Sponsor an entire ward in the new wing." },
-  { id: 12, amount: 50000, name: "The Garden", image: "https://picsum.photos/300/200?random=41", description: "Create our therapeutic garden space." },
-  { id: 13, amount: 100000, name: "A Wing", image: "https://picsum.photos/300/200?random=42", description: "Sponsor an entire wing of the new building." },
-  { id: 14, amount: 250000, name: "The Building", image: "https://picsum.photos/300/200?random=43", description: "Become the principal sponsor of the entire project." },
+  { id: 1, amount: 5, name: "A Brick", image: "/src/assets/images/brick_plain_thumb.png", description: "Buy a brick and help contribute to the project." },
+  { id: 2, amount: 10, name: "A Brick with a name", image: "/src/assets/images/brick_thumb.png", description: "Add your name to our donor wall and help contribute to the project." },
+  { id: 3, amount: 50, name: "A Plant", image: "/src/assets/images/plant_thumb.png", description: "Brighten our garden spaces." },
+  { id: 4, amount: 75, name: "Bedsheets", image: "/src/assets/images/bedsheets_thumb.png", description: "Provide clean sheets for residents." },
+  { id: 5, amount: 100, name: "A Dining Chair", image: "/src/assets/images/diningchair_thumb.png", description: "Provide comfort for a resident." },
+  { id: 6, amount: 250, name: "An Armchair", image: "/src/assets/images/loungechair_thumb.png", description: "Help our residents sit more comfortably." },
+  { id: 7, amount: 350, name: "A Bathroom Chair", image: "/src/assets/images/showerchair_thumb.png", description: "Help our residents sit more safely in the bathroom." },
+  { id: 8, amount: 450, name: "A Mattress", image: "/src/assets/images/mattress_thumb.png", description: "Help our residents sleep more comfortably." },
+  { id: 9, amount: 500, name: "A Bed", image: "/src/assets/images/bed_featured.png", description: "Equip a room for a new resident." },
+  { id: 10, amount: 850, name: "An Armchair for the Bedroom", image: "/src/assets/images/recliner_thumb.png", description: "Help our residents sit more comfortably in privacy." },
+  { id: 11, amount: 2500, name: "A Lounge Suite", image: "/src/assets/images/lounge_featured.png", description: "Furnish a communal lounge area." },
+  { id: 12, amount: 5000, name: "A Hoist", image: "/src/assets/images/hoist_thumb.png", description: "Provide a new hoist for our care team to better help your loved ones." },
+  { id: 13, amount: 10000, name: "A Dementia Suite", image: "/src/assets/images/ensuite_thumb.png", description: "Fully fit out a dementia care suite." },
+  { id: 14, amount: 25000, name: "A Room", image: "/src/assets/images/room_featured.png", description: "Sponsor an entire room in the new building." },
+  { id: 15, amount: 100000, name: "A Wing", image: "/src/assets/images/wing_cornerstone.png", description: "Sponsor an entire wing of the new building." },
+  { id: 16, amount: 250000, name: "The Building", image: "/src/assets/images/flap_aerial.png", description: "Become the principal sponsor of the entire project." },
 ];
+
+donationTiers.sort((a, b) => a.amount - b.amount);
 
 // Render tiers
 const tiersGrid = document.getElementById('tiers-grid') as HTMLDivElement;

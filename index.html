@@ -4,22 +4,22 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="O'Conor Home — caring for the people of Westport since 1900. Dignified, compassionate residential care rooted in community." />
-  <title>O'Conor Home — Westport</title>
+  <meta name="description" content="O'Conor Home — caring for the people of Westport and the Buller community since 1918. Dignified, compassionate residential care rooted in place." />
+  <title>O'Conor Home — Westport · Since 1918</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="src/styles/main.css" />
 </head>
 
 <body>
 
   <header>
-
     <div class="logo">
-  <a href="/index.html">O'Conor Home</a>
-</div>
-
+      <a href="/index.html">
+        <img src="/src/assets/images/logo.png" alt="O'Conor Home" />
+      </a>
+    </div>
     <nav aria-label="Main navigation">
       <ul>
         <li><a href="pages/stories.html">Stories</a></li>
@@ -38,17 +38,20 @@
 
     <!-- Hero -->
     <section class="main-header">
-      <h1>"You do not live in our facility. We work in your home."</h1>
-      <p>Caring for Westport since 1900</p>
-      <button onclick="window.location.href='pages/contact.html'">Get in touch</button>
+      <div class="main-header-inner">
+        <p class="hero-tagline">Westport · Te Tai Poutini West Coast · Aotearoa New Zealand</p>
+        <h1>"You do not live in our facility. We work in your home."</h1>
+        <p class="hero-sub">Caring for our community since 1918</p>
+        <a href="pages/contact.html" class="btn-primary">Get in touch</a>
+      </div>
     </section>
 
     <!-- Intro -->
     <section class="intro">
       <div class="intro-inner">
-        <!-- TODO: Replace with content from content team -->
         <h2>A home rooted in Westport</h2>
-        <p>O'Conor Home has been caring for the people of Westport and the wider Buller community for over a century. We believe in dignity, warmth, and the simple truth that this is your home — not ours.</p>
+        <p>In 1904, Westport businessman Eugene Joseph O'Conor wrote a will that would quietly shape the life of this town for more than a century. He bequeathed his 22-acre estate to establish a home for the people of Buller who needed one, regardless of denomination.</p>
+        <p>The doors opened in 1918. The Sisters of Mercy staffed it without pay. The community covered the rest. That founding pattern — open to all, held together by professional care and community support — is still how we operate today.</p>
         <p><a href="pages/stories.html">Read our stories</a></p>
       </div>
     </section>
@@ -58,18 +61,33 @@
       <div class="values-grid">
         <div class="value-card">
           <span class="value-icon">🏠</span>
-          <h3>Your Home</h3>
-          <p>Your space, your routine, your life. We work around you.</p>
+          <h3>Home, Not Facility</h3>
+          <p>We work in our residents' home, not the other way around. Your space, your routine, your life.</p>
         </div>
         <div class="value-card">
           <span class="value-icon">🤝</span>
-          <h3>Dignified Care</h3>
-          <p>Compassionate staff who treat every resident as family.</p>
+          <h3>Care of the Highest Quality</h3>
+          <p>Compassionate staff providing clinical and personal care for the people who live here.</p>
         </div>
         <div class="value-card">
           <span class="value-icon">🌿</span>
-          <h3>Community</h3>
-          <p>A warm, connected environment rooted in Westport.</p>
+          <h3>Open to All</h3>
+          <p>Our founder's intent was that the home serve the whole community, regardless of background, belief, or means.</p>
+        </div>
+        <div class="value-card">
+          <span class="value-icon">⚓</span>
+          <h3>Community Roots</h3>
+          <p>We are held up by the people of Buller, and we hold them up in return. Of Westport, of the West Coast, of Aotearoa.</p>
+        </div>
+        <div class="value-card">
+          <span class="value-icon">🏛️</span>
+          <h3>Stewardship</h3>
+          <p>We are fiscally prudent because we intend to be here for the next hundred years.</p>
+        </div>
+        <div class="value-card">
+          <span class="value-icon">❤️</span>
+          <h3>A Century of Care</h3>
+          <p>The only rest home on the West Coast contracted to provide all levels of care on a single site — since 1918.</p>
         </div>
       </div>
     </section>
@@ -89,7 +107,6 @@
     <!-- Events Preview -->
     <section class="events-preview">
       <div class="events-preview-inner">
-        <!-- TODO: Build out once event structure confirmed with stakeholders -->
         <h2>Upcoming Events</h2>
         <p>Check back soon for upcoming events at O'Conor Home.</p>
         <p><a href="pages/events.html">View all events</a></p>
@@ -99,9 +116,8 @@
     <!-- Project Overview Preview -->
     <section class="project-overview-preview">
       <div class="project-overview-inner">
-        <!-- TODO: Replace with content from content team -->
-        <h2>Our Project</h2>
-        <p>We are working to improve the lives of our residents. Learn more about our vision and how your support makes it possible.</p>
+        <h2>Our Building Project</h2>
+        <p>We're building a new 24-bed hospital wing so Buller's elders can keep receiving hospital-level and dementia care close to home. Plans are approved, the design is complete, and groundworks are already underway.</p>
         <p><a href="pages/project-overview.html">Read about our project</a></p>
       </div>
     </section>
@@ -110,7 +126,7 @@
     <section class="donate-cta">
       <div class="donate-cta-inner">
         <h2>Help Us Build Something Lasting</h2>
-        <p>We're building a new 24-bed hospital wing so Buller's elders can keep receiving hospital-level and dementia care close to home. Plans are approved, the design is complete, groundworks are under way — now we're asking our community to help close the funding gap.</p>
+        <p>Every donation — large or small — helps us continue caring for Westport's elders close to home, where they belong.</p>
         <div class="btn-group">
           <a href="pages/donate.html" class="btn-primary">Support the build</a>
           <a href="pages/project-overview.html" class="btn-secondary">Learn more about the project</a>
@@ -160,55 +176,53 @@
       </div>
     </section>
 
-<!-- Social Media Feed -->
-<section class="social-feed">
-  <div class="social-feed-inner">
-    <h2>Life at O'Conor Home</h2>
-    <p>Follow us on Facebook to stay connected with our community.</p>
-    <div class="social-grid" id="social-grid">
-      <!-- TODO: Replace with real Facebook feed when account is set up -->
-      <div class="social-card">
-        <div class="social-card-header">
-          <span class="social-icon">📘</span>
-          <div>
-            <p class="social-name">O'Conor Home</p>
-            <p class="social-date">2 days ago</p>
+    <!-- Social Feed -->
+    <section class="social-feed">
+      <div class="social-feed-inner">
+        <h2>Life at O'Conor Home</h2>
+        <p>Follow us on Facebook to stay connected with our community.</p>
+        <div class="social-grid">
+          <!-- TODO: Replace with real Facebook feed -->
+          <div class="social-card">
+            <div class="social-card-header">
+              <span class="social-icon">📘</span>
+              <div>
+                <p class="social-name">O'Conor Home</p>
+                <p class="social-date">2 days ago</p>
+              </div>
+            </div>
+            <p class="social-text">Our residents enjoyed a wonderful afternoon tea today, with live music from local guitarist James Murphy. Moments like these remind us why we do what we do. 🎵☕</p>
+            <img src="src/assets/images/lounge_featured.png" alt="Afternoon tea" class="social-image" />
+          </div>
+          <div class="social-card">
+            <div class="social-card-header">
+              <span class="social-icon">📘</span>
+              <div>
+                <p class="social-name">O'Conor Home</p>
+                <p class="social-date">5 days ago</p>
+              </div>
+            </div>
+            <p class="social-text">Spring is here and our garden is looking beautiful! A big thank you to our volunteer gardening team who give their time every week. 🌸🌿</p>
+            <img src="src/assets/images/plant_thumb.png" alt="Garden" class="social-image" />
+          </div>
+          <div class="social-card">
+            <div class="social-card-header">
+              <span class="social-icon">📘</span>
+              <div>
+                <p class="social-name">O'Conor Home</p>
+                <p class="social-date">1 week ago</p>
+              </div>
+            </div>
+            <p class="social-text">We're so proud to announce that our building project groundworks are now complete. Thank you to everyone who has supported us. 🏗️❤️</p>
+            <img src="src/assets/images/wing_cornerstone.png" alt="Building project" class="social-image" />
           </div>
         </div>
-        <p class="social-text">Our residents enjoyed a wonderful afternoon tea today, with live music from local guitarist James Murphy. Moments like these remind us why we do what we do. 🎵☕</p>
-        <img src="https://picsum.photos/600/400?random=50" alt="Afternoon tea" class="social-image" />
+        <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" class="btn-primary social-follow-btn">
+          <!-- TODO: Replace with real Facebook page URL -->
+          Follow us on Facebook
+        </a>
       </div>
-
-      <div class="social-card">
-        <div class="social-card-header">
-          <span class="social-icon">📘</span>
-          <div>
-            <p class="social-name">O'Conor Home</p>
-            <p class="social-date">5 days ago</p>
-          </div>
-        </div>
-        <p class="social-text">Spring is here and our garden is looking beautiful! A big thank you to our volunteer gardening team who give their time every week to keep our outdoor spaces so welcoming. 🌸🌿</p>
-        <img src="https://picsum.photos/600/400?random=51" alt="Garden" class="social-image" />
-      </div>
-
-      <div class="social-card">
-        <div class="social-card-header">
-          <span class="social-icon">📘</span>
-          <div>
-            <p class="social-name">O'Conor Home</p>
-            <p class="social-date">1 week ago</p>
-          </div>
-        </div>
-        <p class="social-text">We're so proud to announce that our building project groundworks are now complete. A huge milestone for O'Conor Home and the Westport community. Thank you to everyone who has supported us. 🏗️❤️</p>
-        <img src="https://picsum.photos/600/400?random=52" alt="Building project" class="social-image" />
-      </div>
-    </div>
-    <a href="https://www.facebook.com/oconorhome/" target="_blank" rel="noopener noreferrer" class="btn-primary social-follow-btn">
-      <!-- TODO: Replace with real Facebook page URL -->
-      Follow us on Facebook
-    </a>
-  </div>
-</section>
+    </section>
 
   </main>
 
@@ -217,13 +231,15 @@
       <div class="footer-grid">
         <div class="footer-col">
           <h3>O'Conor Home</h3>
-          <p>Caring for the people of Westport since 1900. This is your home — not ours.</p>
+          <p>Caring for our community since 1918. This is your home — not ours.</p>
+          <p class="footer-legal">The O'Conor Institute Trust Board<br>Registered Charity CC39255</p>
         </div>
         <div class="footer-col">
           <h3>Quick Links</h3>
           <ul>
             <li><a href="pages/stories.html">Stories</a></li>
             <li><a href="pages/virtual-tour.html">Virtual Tour</a></li>
+            <li><a href="pages/news.html">News</a></li>
             <li><a href="pages/events.html">Events</a></li>
             <li><a href="pages/faq.html">FAQ</a></li>
             <li><a href="pages/availability.html">Availability</a></li>
@@ -233,20 +249,20 @@
         </div>
         <div class="footer-col">
           <h3>Contact</h3>
-          <!-- TODO: Replace with real contact details -->
-          <p>123 Placeholder Street<br>Westport, New Zealand</p>
-          <p>Phone: 03 xxx xxxx</p>
-          <p>Email: info@oconorhome.nz</p>
+          <p>190 Queen Street<br>Westport 7825<br>New Zealand</p>
+          <p>Phone: <a href="tel:037888210">03 788 8210</a></p>
+          <p>Email: <a href="mailto:susan@oconorhome.co.nz">susan@oconorhome.co.nz</a></p>
         </div>
       </div>
       <div class="footer-bottom">
-        <p>© 2025 O'Conor Home. All rights reserved.</p>
+        <p>© 2026 The O'Conor Institute Trust Board. All rights reserved.</p>
         <p>Registered Charity CC39255</p>
       </div>
     </div>
   </footer>
 
-  
-<script type="module" src="src/scripts/homepage.ts"></script>
+  <script type="module" src="src/scripts/homepage.ts"></script>
+  <script type="module" src="src/scripts/donor-wall.ts"></script>
+
 </body>
 </html>
