@@ -1,10 +1,9 @@
 import { loadStripe } from '@stripe/stripe-js';
+import type { Stripe, StripeCardElement } from '@stripe/stripe-js';
 import { createClient } from '@supabase/supabase-js';
 
-
-
 // Initialise Stripe
-const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLIC);
+const stripe = await loadStripe(import.meta.env.VITE_STRIPE_PUBLIC) as Stripe;
 
 // Initialise Supabase
 const supabase = createClient(
@@ -12,138 +11,164 @@ const supabase = createClient(
   import.meta.env.VITE_SUPABASE_PUBLIC
 );
 
-// Donation tiers
-const donationTiers = [
-  { id: 1, amount: 5, name: "A Brick", image: "/src/assets/images/brick_plain_thumb.png", description: "Buy a brick and help contribute to the project." },
-  { id: 2, amount: 10, name: "A Brick with a name", image: "/src/assets/images/brick_thumb.png", description: "Add your name to our donor wall and help contribute to the project." },
-  { id: 3, amount: 50, name: "A Plant", image: "/src/assets/images/plant_thumb.png", description: "Brighten our garden spaces." },
-  { id: 4, amount: 75, name: "Bedsheets", image: "/src/assets/images/bedsheets_thumb.png", description: "Provide clean sheets for residents." },
-  { id: 5, amount: 100, name: "A Dining Chair", image: "/src/assets/images/diningchair_thumb.png", description: "Provide comfort for a resident." },
-  { id: 6, amount: 250, name: "An Armchair", image: "/src/assets/images/loungechair_thumb.png", description: "Help our residents sit more comfortably." },
-  { id: 7, amount: 350, name: "A Bathroom Chair", image: "/src/assets/images/showerchair_thumb.png", description: "Help our residents sit more safely in the bathroom." },
-  { id: 8, amount: 450, name: "A Mattress", image: "/src/assets/images/mattress_thumb.png", description: "Help our residents sleep more comfortably." },
-  { id: 9, amount: 500, name: "A Bed", image: "/src/assets/images/bed_featured.png", description: "Equip a room for a new resident." },
-  { id: 10, amount: 850, name: "An Armchair for the Bedroom", image: "/src/assets/images/recliner_thumb.png", description: "Help our residents sit more comfortably in privacy." },
-  { id: 11, amount: 2500, name: "A Lounge Suite", image: "/src/assets/images/lounge_featured.png", description: "Furnish a communal lounge area." },
-  { id: 12, amount: 5000, name: "A Hoist", image: "/src/assets/images/hoist_thumb.png", description: "Provide a new hoist for our care team to better help your loved ones." },
-  { id: 13, amount: 10000, name: "A Dementia Suite", image: "/src/assets/images/ensuite_thumb.png", description: "Fully fit out a dementia care suite." },
-  { id: 14, amount: 25000, name: "A Room", image: "/src/assets/images/room_featured.png", description: "Sponsor an entire room in the new building." },
-  { id: 15, amount: 100000, name: "A Wing", image: "/src/assets/images/wing_cornerstone.png", description: "Sponsor an entire wing of the new building." },
-  { id: 16, amount: 250000, name: "The Building", image: "/src/assets/images/flap_aerial.png", description: "Become the principal sponsor of the entire project." },
-];
+// ─── Stripe card element ──────────────────────────────
+const elements = stripe.elements();
+const cardElement = elements.create('card', {
+  style: {
+    base: {
+      fontFamily: "'Open Sans', sans-serif",
+      fontSize: '15px',
+      color: '#333333',
+      '::placeholder': { color: '#DDA8B5' },
+    },
+    invalid: { color: '#e74c3c' },
+  }
+});
+cardElement.mount('#modal-card-element');
 
-donationTiers.sort((a, b) => a.amount - b.amount);
+// ─── Modal elements ───────────────────────────────────
+const overlay = document.getElementById('stripe-modal-overlay') as HTMLDivElement;
+const closeBtn = document.getElementById('stripe-modal-close') as HTMLButtonElement;
+const modalItemName = document.getElementById('stripe-modal-item-name') as HTMLParagraphElement;
+const modalAmount = document.getElementById('stripe-modal-amount') as HTMLParagraphElement;
+const modalBtnAmount = document.getElementById('modal-btn-amount') as HTMLSpanElement;
+const modalForm = document.getElementById('stripe-modal-form') as HTMLFormElement;
+const modalSuccess = document.getElementById('modal-success') as HTMLDivElement;
+const modalCardErrors = document.getElementById('modal-card-errors') as HTMLDivElement;
+const modalSubmitBtn = document.getElementById('modal-submit-btn') as HTMLButtonElement;
+const modalDonorName = document.getElementById('modal-donor-name') as HTMLInputElement;
+const modalDonorEmail = document.getElementById('modal-donor-email') as HTMLInputElement;
+const modalDonorMessage = document.getElementById('modal-donor-message') as HTMLTextAreaElement;
+const modalConsent = document.getElementById('modal-consent') as HTMLInputElement;
 
-// Render tiers
-const tiersGrid = document.getElementById('tiers-grid') as HTMLDivElement;
+let currentAmount = 0;
 
-tiersGrid.innerHTML = donationTiers.map(tier => `
-  <div class="tier-card" data-amount="${tier.amount}" data-name="${tier.name}">
-    <img src="${tier.image}" alt="${tier.name}" />
-    <div class="tier-card-content">
-      <p class="tier-card-name">${tier.name}</p>
-      <p class="tier-card-description">${tier.description}</p>
-      <p class="tier-card-amount">$${tier.amount.toLocaleString()} NZD</p>
-    </div>
-  </div>
-`).join('');
-
-// Handle tier selection
-document.querySelectorAll('.tier-card').forEach((card) => {
-  card.addEventListener('click', () => {
-    // Remove selected from all cards
-    document.querySelectorAll('.tier-card').forEach(c => c.classList.remove('selected'));
-    
-    // Select this card
-    card.classList.add('selected');
-    
-    // Pre-fill the amount input
-    const amount = (card as HTMLElement).dataset['amount'] ?? '';
-    amountInput.value = amount;
-    
-    // Scroll to form
-    form.scrollIntoView({ behavior: 'smooth' });
+// ─── Open modal when a menu card is clicked ───────────
+document.querySelectorAll('.menu-item[data-amount]').forEach((card) => {
+  card.addEventListener('click', (e) => {
+    e.preventDefault();
+    const amount = parseFloat((card as HTMLElement).dataset.amount || '0');
+    const name = (card as HTMLElement).dataset.name || 'Donation';
+    openModal(amount, name);
   });
 });
 
-// Get form elements
-const form = document.getElementById('donation-form') as HTMLFormElement;
-const amountInput = document.getElementById('amount') as HTMLInputElement;
-const donorNameInput = document.getElementById('donor-name') as HTMLInputElement;
-const donorEmailInput = document.getElementById('donor-email') as HTMLInputElement;
-const donorMessageInput = document.getElementById('donor-message') as HTMLTextAreaElement;
-const consentCheckbox = document.getElementById('consent') as HTMLInputElement;
-const cardErrors = document.getElementById('card-errors') as HTMLDivElement;
+function openModal(amount: number, itemName: string) {
+  currentAmount = amount;
+  const formatted = amount >= 1000
+    ? `$${(amount / 1000).toFixed(amount % 1000 === 0 ? 0 : 1)}k`
+    : `$${amount.toLocaleString()}`;
 
-// Set up Stripe card element
-const elements = stripe!.elements();
-const cardElement = elements.create('card');
-cardElement.mount('#card-element');
+  modalItemName.textContent = itemName;
+  modalAmount.textContent = formatted;
+  modalBtnAmount.textContent = formatted;
 
-// Handle form submission
-form.addEventListener('submit', async (e) => {
+  // Reset form state
+  modalForm.style.display = 'flex';
+  modalSuccess.style.display = 'none';
+  modalCardErrors.textContent = '';
+  modalSubmitBtn.disabled = false;
+  modalSubmitBtn.textContent = `Donate ${formatted}`;
+  modalDonorName.value = '';
+  modalDonorEmail.value = '';
+  modalDonorMessage.value = '';
+  modalConsent.checked = false;
+
+  overlay.classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  overlay.classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+closeBtn.addEventListener('click', closeModal);
+overlay.addEventListener('click', (e) => {
+  if (e.target === overlay) closeModal();
+});
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeModal();
+});
+
+// ─── Handle payment submission ────────────────────────
+modalForm.addEventListener('submit', async (e) => {
   e.preventDefault();
 
-  const amount = parseFloat(amountInput.value);
-  const donorName = donorNameInput.value;
-  const donorMessage = donorMessageInput.value;
-  const consentToDisplay = consentCheckbox.checked;
+  modalSubmitBtn.disabled = true;
+  modalSubmitBtn.textContent = 'Processing...';
+  modalCardErrors.textContent = '';
 
-  // Step 1: Create payment intent via edge function
-  const response = await fetch(
-    `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/create-payment-intent`,
-    {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLIC}`,
-      },
-      body: JSON.stringify({ amount }),
+  try {
+    // Step 1: Create payment intent via Supabase edge function
+    const response = await fetch(
+      `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/create-payment-intent`,
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLIC}`,
+        },
+        body: JSON.stringify({ amount: currentAmount }),
+      }
+    );
+
+    const { clientSecret, error: intentError } = await response.json();
+
+    if (intentError) {
+      throw new Error(intentError);
     }
-  );
 
-const responseText = await response.text();
-console.log('Raw response:', responseText);
-const responseData = JSON.parse(responseText);
-const { clientSecret } = responseData;
-console.log('Client secret:', clientSecret);
+    // Step 2: Confirm card payment
+    const result = await stripe.confirmCardPayment(clientSecret, {
+      payment_method: { card: cardElement as StripeCardElement }
+    });
 
-  // Step 2: Confirm payment with Stripe
-  const result = await stripe!.confirmCardPayment(clientSecret, {
-    payment_method: { card: cardElement }
-  });
+    if (result.error) {
+      modalCardErrors.textContent = result.error.message ?? 'Payment failed';
+      modalSubmitBtn.disabled = false;
+      modalSubmitBtn.textContent = `Donate $${currentAmount.toLocaleString()}`;
+      return;
+    }
 
-  if (result.error) {
-    cardErrors.textContent = result.error.message ?? 'Payment failed';
-  } else {
     // Step 3: Save to Supabase
-  await supabase.from('donations').insert({
-  amount,
-  donor_name: donorName || null,
-  donor_message: donorMessage || null,
-  consent_to_display: consentToDisplay,
-  stripe_payment_id: result.paymentIntent.id,
-  donor_email: donorEmailInput.value || null,
+    await supabase.from('donations').insert({
+      amount: currentAmount,
+      donor_name: modalDonorName.value || null,
+      donor_email: modalDonorEmail.value || null,
+      donor_message: modalDonorMessage.value || null,
+      consent_to_display: modalConsent.checked,
+      stripe_payment_id: result.paymentIntent.id,
+    });
+
+    // Step 4: Send thank you email if email provided
+    if (modalDonorEmail.value) {
+      await fetch(
+        `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-donation-email`,
+        {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLIC}`,
+          },
+          body: JSON.stringify({
+            donor_name: modalDonorName.value || 'Anonymous',
+            donor_email: modalDonorEmail.value,
+            amount: currentAmount,
+          }),
+        }
+      );
+    }
+
+    // Step 5: Show success
+    modalForm.style.display = 'none';
+    modalSuccess.style.display = 'flex';
+
+  } catch (err) {
+    modalCardErrors.textContent = 'Something went wrong. Please try again.';
+    modalSubmitBtn.disabled = false;
+    modalSubmitBtn.textContent = `Donate $${currentAmount.toLocaleString()}`;
+  }
 });
 
-    // Step 4: Show success
-    form.innerHTML = '<p>Thank you for your donation! 💛</p>';
-  }
-
-  // Send thank you email
-await fetch(
-  `${import.meta.env.VITE_SUPABASE_URL}/functions/v1/send-donation-email`,
-  {
-    method: 'POST',
-    headers: {
-      'Content-Type': 'application/json',
-      'Authorization': `Bearer ${import.meta.env.VITE_SUPABASE_PUBLIC}`,
-    },
-    body: JSON.stringify({
-  donorName: donorName || null,
-  donorEmail: donorEmailInput.value || null,
-  amount,
-}),
-  }
-);
-});
+console.log('Cards found:', document.querySelectorAll('.menu-item[data-amount]').length);
