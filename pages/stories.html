@@ -1,131 +1,103 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Stories — O'Conor Home</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Open+Sans:wght@400;600&display=swap"
-        rel="stylesheet" />
-    <link rel="stylesheet" href="../src/styles/main.css" />
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Stories from residents and families at O'Conor Home, Westport." />
+  <title>Stories — O'Conor Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../src/styles/main.css" />
 </head>
+
 <body>
 
-<header>
-  <div class="logo">
-  <a href="../index.html">
-    <img src="../src/assets/images/logo.png" alt="O'Conor Home" />
-  </a>
-</div>
-  <nav aria-label="Main navigation">
-            <ul>
-                <li><a href="stories.html">Stories</a></li>
-<li><a href="virtual-tour.html">Virtual Tour</a></li>
-<li><a href="news.html">News</a></li>
-<li><a href="events.html">Events</a></li>
-<li><a href="faq.html">FAQ</a></li>
-<li><a href="availability.html">Availability</a></li>
-<li><a href="contact.html">Contact</a></li>
-<li><a href="donate.html">Donate</a></li>
-            </ul>
-        </nav>
-    </header>
-
- <main>
-  <!-- Page Hero -->
-  <section class="page-hero">
-    <div class="page-hero-inner">
-      <h1>Stories</h1>
-      <p>Hear from the residents and families who call O'Conor Home their own.</p>
+  <header>
+    <div class="logo">
+      <a href="../index.html">
+        <img src="../src/assets/images/logo.png" alt="O'Conor Home" />
+      </a>
     </div>
-  </section>
+    <nav aria-label="Main navigation">
+      <ul>
+        <li><a href="stories.html">Stories</a></li>
+        <li><a href="virtual-tour.html">Virtual Tour</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="availability.html">Availability</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="donate.html">Donate</a></li>
+      </ul>
+    </nav>
+  </header>
 
-  <!-- Story Grid -->
-  <section class="stories">
-   <div class="stories-grid">
+  <main>
 
-  <div class="story-card" data-story="1">
-    <div class="story-card-image">
-      <img src="../src/assets/images/Bill Currie.jpg" alt="Bill Currie" />
+    <section class="page-hero">
+      <div class="page-hero-inner">
+        <h1>Stories</h1>
+        <p>Hear from the residents and families who call O'Conor Home their own.</p>
+      </div>
+    </section>
+
+    <section class="stories">
+      <div class="stories-grid">
+        <!-- Loaded dynamically from Supabase -->
+      </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal-overlay" id="story-modal-overlay">
+      <div class="modal">
+        <button class="modal-close" id="modal-story-close">✕</button>
+        <img class="modal-image" id="modal-story-image" src="" alt="" />
+        <h2 class="modal-title" id="modal-story-title"></h2>
+        <div class="modal-body" id="modal-story-body"></div>
+      </div>
     </div>
-    <div class="story-card-content">
-      <h3>Bill Currie</h3>
-      <p class="story-blurb">"We never had much money, but we always had plenty to eat." Bill Currie has lived almost his entire life in the Buller district. At 96 years old, his memories stretch back to a time when families worked hard, wasted nothing, and built their lives with their own hands.</p>
-      <button class="story-read-more">Read full story</button>
-    </div>
-  </div>
 
-  <div class="story-card" data-story="2">
-    <div class="story-card-image">
-      <img src="../src/assets/images/Claude Walsh.jpg" alt="Claude Walsh" />
-    </div>
-    <div class="story-card-content">
-      <h3>Claude Walsh</h3>
-      <p class="story-blurb">"If you've got a job, work bloody hard." Claude Walsh was born in Westport on 9 January 1934. His father worked as a butcher and managed the local Oxnam's butchery, a trade that would later become the centre of Claude's own working life.</p>
-      <button class="story-read-more">Read full story</button>
-    </div>
-  </div>
+  </main>
 
-  <div class="story-card" data-story="3">
-    <div class="story-card-image">
-      <img src="../src/assets/images/Margaret Phipps Black.jpg" alt="Margaret Phipps Black" />
-    </div>
-    <div class="story-card-content">
-      <h3>Margaret Phipps Black</h3>
-      <p class="story-blurb">"Go with your gut." Margaret Phipps Black was born in 1962 in Kaikohe, the youngest of eleven children. She has lived a life of independence, resilience, and learning to trust herself.</p>
-      <button class="story-read-more">Read full story</button>
-    </div>
-  </div>
-
-</div>
-  </section>
-
-  <!-- Modal -->
-  <div class="modal-overlay" id="story-modal">
-    <div class="modal">
-      <button class="modal-close" id="modal-close">✕</button>
-      <img class="modal-image" id="modal-image" src="" alt="" />
-      <h2 class="modal-title" id="modal-title"></h2>
-      <p class="modal-body" id="modal-body"></p>
-    </div>
-  </div>
-
-</main>
-
-    <footer>
-        <div class="footer-inner">
-            <div class="footer-grid">
-                <div class="footer-col">
-                    <h3>O'Conor Home</h3>
-                    <p>Caring for the people of Westport since 1918. This is your home — not ours.</p>
-                </div>
-                <div class="footer-col">
-                    <h3>Quick Links</h3>
-                    <ul>
-                        <li><a href="stories.html">Stories</a></li>
-                        <li><a href="virtual-tour.html">Virtual Tour</a></li>
-                        <li><a href="events.html">Events</a></li>
-                        <li><a href="faq.html">FAQ</a></li>
-                        <li><a href="availability.html">Availability</a></li>
-                        <li><a href="contact.html">Contact</a></li>
-                        <li><a href="donate.html">Donate</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                 <h3>Contact</h3>
-           <p>190 Queen Street<br>Westport 7825, New Zealand</p>
-          <p>Phone: 03 788 8210</p>
-          <p>Email: susan@oconorhome.co.nz</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p>© 2025 O'Conor Home. All rights reserved.</p>
-                <p>Registered Charity CC39255</p>
-            </div>
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>O'Conor Home</h3>
+          <p>Caring for our community since 1918. This is your home — not ours.</p>
+          <p class="footer-legal">The O'Conor Institute Trust Board<br>Registered Charity CC39255</p>
+          <a href="admin-login.html" class="footer-admin-link">Staff login</a>
         </div>
-    </footer>
-<script type="module" src="../src/scripts/stories.ts"></script>
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="stories.html">Stories</a></li>
+            <li><a href="virtual-tour.html">Virtual Tour</a></li>
+            <li><a href="news.html">News</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="availability.html">Availability</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="donate.html">Donate</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Contact</h3>
+          <p>190 Queen Street<br>Westport 7825<br>New Zealand</p>
+          <p>Phone: <a href="tel:037888210">03 788 8210</a></p>
+          <p>Email: <a href="mailto:susan@oconorhome.co.nz">susan@oconorhome.co.nz</a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 The O'Conor Institute Trust Board. All rights reserved.</p>
+        <p>Registered Charity CC39255</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="../src/scripts/stories.ts"></script>
+
 </body>
 </html>

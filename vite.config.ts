@@ -19,6 +19,7 @@ export default defineConfig({
         adminLogin: 'pages/admin-login.html',
         adminEvents: 'pages/admin-events.html',
         news: 'pages/news.html',
+        adminStories: 'admin-stories.html',
       }
     }
   }

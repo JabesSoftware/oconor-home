@@ -10,24 +10,26 @@ const supabase = createClient(
   import.meta.env.VITE_SUPABASE_PUBLIC
 );
 
-// Elements
-const form = document.getElementById('add-event-form') as HTMLFormElement;
-const titleInput = document.getElementById('event-title') as HTMLInputElement;
-const dateInput = document.getElementById('event-date') as HTMLInputElement;
-const timeInput = document.getElementById('event-time') as HTMLInputElement;
-const locationInput = document.getElementById('event-location') as HTMLInputElement;
-const descriptionInput = document.getElementById('event-description') as HTMLTextAreaElement;
-const addEventError = document.getElementById('add-event-error') as HTMLDivElement;
-const eventsList = document.getElementById('events-list') as HTMLDivElement;
+// ─── Logout ───────────────────────────────────────────
 const logoutBtn = document.getElementById('logout-btn') as HTMLButtonElement;
-
-// Logout
 logoutBtn.addEventListener('click', () => {
   sessionStorage.removeItem('admin-authenticated');
   window.location.href = 'admin-login.html';
 });
 
-// Load events
+// ═══════════════════════════════════════════════════════
+// EVENTS
+// ═══════════════════════════════════════════════════════
+
+const eventForm = document.getElementById('add-event-form') as HTMLFormElement;
+const eventTitleInput = document.getElementById('event-title') as HTMLInputElement;
+const eventDateInput = document.getElementById('event-date') as HTMLInputElement;
+const eventTimeInput = document.getElementById('event-time') as HTMLInputElement;
+const eventLocationInput = document.getElementById('event-location') as HTMLInputElement;
+const eventDescriptionInput = document.getElementById('event-description') as HTMLTextAreaElement;
+const addEventError = document.getElementById('add-event-error') as HTMLDivElement;
+const eventsList = document.getElementById('events-list') as HTMLDivElement;
+
 async function loadEvents() {
   const { data, error } = await supabase
     .from('events')
@@ -40,7 +42,7 @@ async function loadEvents() {
   }
 
   if (!data || data.length === 0) {
-    eventsList.innerHTML = '<p class="admin-loading">No events yet. Add one above.</p>';
+    eventsList.innerHTML = '<p class="admin-loading">No events yet.</p>';
     return;
   }
 
@@ -55,11 +57,10 @@ async function loadEvents() {
     </div>
   `).join('');
 
-  // Add delete listeners
   document.querySelectorAll('.event-delete-btn').forEach((btn) => {
     btn.addEventListener('click', async () => {
       const id = (btn as HTMLElement).dataset['id'];
-      if (confirm('Are you sure you want to delete this event?')) {
+      if (confirm('Delete this event?')) {
         await supabase.from('events').delete().eq('id', id);
         loadEvents();
       }
@@ -67,106 +68,255 @@ async function loadEvents() {
   });
 }
 
-// Add event
-form.addEventListener('submit', async (e) => {
+eventForm.addEventListener('submit', async (e) => {
   e.preventDefault();
-
+  addEventError.textContent = '';
   const { error } = await supabase.from('events').insert({
-    title: titleInput.value,
-    date: dateInput.value,
-    time: timeInput.value || null,
-    location: locationInput.value || null,
-    description: descriptionInput.value || null,
+    title: eventTitleInput.value,
+    date: eventDateInput.value,
+    time: eventTimeInput.value || null,
+    location: eventLocationInput.value || null,
+    description: eventDescriptionInput.value || null,
   });
-
   if (error) {
-    addEventError.textContent = 'Error adding event. Please try again.';
-    console.log(error);
+    addEventError.textContent = 'Error adding event.';
   } else {
-    form.reset();
+    eventForm.reset();
     loadEvents();
   }
 });
 
 loadEvents();
 
+// ═══════════════════════════════════════════════════════
+// FAQ
+// ═══════════════════════════════════════════════════════
 
-// Newsletter upload
-const uploadForm = document.getElementById('upload-newsletter-form') as HTMLFormElement;
-const newsletterTitle = document.getElementById('newsletter-title') as HTMLInputElement;
-const newsletterDate = document.getElementById('newsletter-date') as HTMLInputElement;
-const newsletterPdf = document.getElementById('newsletter-pdf') as HTMLInputElement;
-const uploadError = document.getElementById('upload-newsletter-error') as HTMLDivElement;
-const uploadProgress = document.getElementById('upload-progress') as HTMLDivElement;
+const faqForm = document.getElementById('add-faq-form') as HTMLFormElement;
+const faqCategory = document.getElementById('faq-category') as HTMLSelectElement;
+const faqQuestion = document.getElementById('faq-question') as HTMLInputElement;
+const faqAnswer = document.getElementById('faq-answer') as HTMLTextAreaElement;
+const addFaqError = document.getElementById('add-faq-error') as HTMLDivElement;
+const faqList = document.getElementById('faq-list') as HTMLDivElement;
 
-async function loadNewsletters() {
+async function loadFaqs() {
   const { data, error } = await supabase
-    .from('newsletters')
+    .from('faqs')
     .select('*')
-    .order('date', { ascending: false });
+    .order('category', { ascending: true })
+    .order('created_at', { ascending: true });
 
-  const list = document.getElementById('newsletters-list') as HTMLDivElement;
-
-  if (error || !data || data.length === 0) {
-    list.innerHTML = '<p class="admin-loading">No newsletters yet. Upload one above.</p>';
+  if (error) {
+    faqList.innerHTML = '<p style="color:red">Error loading FAQ.</p>';
     return;
   }
 
-  list.innerHTML = data.map(newsletter => `
+  if (!data || data.length === 0) {
+    faqList.innerHTML = '<p class="admin-loading">No FAQ questions yet.</p>';
+    return;
+  }
+
+  faqList.innerHTML = data.map(faq => `
     <div class="event-list-item">
       <div class="event-list-item-details">
-        <h3>${newsletter.title}</h3>
-        <p>${new Date(newsletter.date).toLocaleDateString('en-NZ', { year: 'numeric', month: 'long' })}</p>
+        <p style="font-size:var(--font-size-caption);color:var(--color-warmGold);font-weight:600;">${faq.category}</p>
+        <h3>${faq.question}</h3>
+        <p>${faq.answer}</p>
       </div>
-      <div style="display:flex;gap:0.5rem">
-        <a href="${newsletter.pdf_url}" target="_blank" class="btn-primary" style="font-size:var(--font-size-caption);padding:0.4rem 0.75rem">View</a>
-        <button class="newsletter-delete-btn event-delete-btn" data-id="${newsletter.id}">Delete</button>
+      <div style="display:flex;flex-direction:column;gap:0.5rem;flex-shrink:0;">
+        <button class="faq-edit-btn" data-id="${faq.id}" data-question="${encodeURIComponent(faq.question)}" data-answer="${encodeURIComponent(faq.answer)}" data-category="${faq.category}">Edit</button>
+        <button class="event-delete-btn" data-id="${faq.id}">Delete</button>
       </div>
     </div>
   `).join('');
 
-  document.querySelectorAll('.newsletter-delete-btn').forEach((btn) => {
+  // Delete
+  document.querySelectorAll('.event-delete-btn[data-id]').forEach((btn) => {
     btn.addEventListener('click', async () => {
       const id = (btn as HTMLElement).dataset['id'];
-      if (confirm('Are you sure you want to delete this newsletter?')) {
-        await supabase.from('newsletters').delete().eq('id', id);
-        loadNewsletters();
+      if (confirm('Delete this FAQ question?')) {
+        await supabase.from('faqs').delete().eq('id', id);
+        loadFaqs();
       }
+    });
+  });
+
+  // Edit — pre-fill form
+  document.querySelectorAll('.faq-edit-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const el = btn as HTMLElement;
+      faqQuestion.value = decodeURIComponent(el.dataset['question'] || '');
+      faqAnswer.value = decodeURIComponent(el.dataset['answer'] || '');
+      faqCategory.value = el.dataset['category'] || 'General';
+      faqForm.dataset['editId'] = el.dataset['id'];
+      faqForm.querySelector('button[type="submit"]')!.textContent = 'Save Changes';
+      faqQuestion.focus();
     });
   });
 }
 
-uploadForm.addEventListener('submit', async (e) => {
+faqForm.addEventListener('submit', async (e) => {
   e.preventDefault();
-  uploadError.textContent = '';
-  uploadProgress.style.display = 'block';
+  addFaqError.textContent = '';
 
-  const file = newsletterPdf.files?.[0];
-  if (!file) {
-    uploadError.textContent = 'Please select a PDF file.';
-    uploadProgress.style.display = 'none';
+  console.log('FAQ submit fired');
+  console.log('Edit ID:', faqForm.dataset['editId']);
+  console.log('Values:', faqCategory.value, faqQuestion.value, faqAnswer.value);
+
+  const editId = faqForm.dataset['editId'];
+
+  if (editId) {
+    // Update existing
+    const { error } = await supabase.from('faqs').update({
+      category: faqCategory.value,
+      question: faqQuestion.value,
+      answer: faqAnswer.value,
+    }).eq('id', editId);
+
+    if (error) {
+      addFaqError.textContent = 'Error updating FAQ.';
+    } else {
+      faqForm.reset();
+      delete faqForm.dataset['editId'];
+      faqForm.querySelector('button[type="submit"]')!.textContent = 'Add FAQ';
+      loadFaqs();
+    }
+  } else {
+    // Insert new
+   const { error } = await supabase.from('faqs').insert({
+  category: faqCategory.value,
+  question: faqQuestion.value,
+  answer: faqAnswer.value,
+});
+
+console.log('FAQ insert error:', error);
+
+if (error) {
+  addFaqError.textContent = 'Error adding FAQ.';
+    } else {
+      faqForm.reset();
+      loadFaqs();
+    }
+  }
+});
+
+loadFaqs();
+
+// ═══════════════════════════════════════════════════════
+// AVAILABILITY
+// ═══════════════════════════════════════════════════════
+
+const availabilityContainer = document.getElementById('availability-form-container') as HTMLDivElement;
+const availabilityError = document.getElementById('availability-error') as HTMLDivElement;
+
+const CARE_TYPES = [
+  { key: 'rest_home', label: 'Rest Home' },
+  { key: 'hospital', label: 'Hospital Level' },
+  { key: 'dementia', label: 'Dementia Care' },
+];
+
+const STATUS_OPTIONS = ['Available', 'Limited', 'Waitlist'];
+
+async function loadAvailability() {
+  const { data, error } = await supabase
+    .from('availability')
+    .select('*');
+
+  if (error) {
+    availabilityContainer.innerHTML = '<p style="color:red">Error loading availability.</p>';
     return;
   }
 
-  // Upload PDF to Supabase Storage
+  // Build a map for easy lookup
+  const map: Record<string, any> = {};
+  (data || []).forEach(row => { map[row.care_type] = row; });
+
+  availabilityContainer.innerHTML = `
+    <form id="availability-form">
+      ${CARE_TYPES.map(ct => {
+        const row = map[ct.key] || {};
+        return `
+          <div class="availability-admin-row">
+            <h3>${ct.label}</h3>
+            <div class="admin-form-row">
+              <div class="form-group">
+                <label>Status</label>
+                <select id="avail-status-${ct.key}">
+                  ${STATUS_OPTIONS.map(s => `<option value="${s}" ${row.status === s ? 'selected' : ''}>${s}</option>`).join('')}
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Note (optional)</label>
+                <input type="text" id="avail-note-${ct.key}" value="${row.note || ''}" placeholder="e.g. 2 beds available" />
+              </div>
+            </div>
+          </div>
+        `;
+      }).join('')}
+      <div id="avail-save-msg" style="color:green;font-size:var(--font-size-caption);margin-bottom:1rem;"></div>
+      <button type="submit">Save Availability</button>
+    </form>
+  `;
+
+  const availForm = document.getElementById('availability-form') as HTMLFormElement;
+  const saveMsg = document.getElementById('avail-save-msg') as HTMLDivElement;
+
+  availForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    saveMsg.textContent = '';
+    availabilityError.textContent = '';
+
+    for (const ct of CARE_TYPES) {
+      const status = (document.getElementById(`avail-status-${ct.key}`) as HTMLSelectElement).value;
+      const note = (document.getElementById(`avail-note-${ct.key}`) as HTMLInputElement).value;
+
+     console.log('Saving availability for:', ct.key, status, note);
+const { error } = await supabase
+  .from('availability')
+        .upsert({ care_type: ct.key, status, note: note || null }, { onConflict: 'care_type' });
+
+      if (error) {
+        availabilityError.textContent = `Error saving ${ct.label}.`;
+        return;
+      }
+    }
+
+    saveMsg.textContent = '✓ Availability saved successfully.';
+    setTimeout(() => { saveMsg.textContent = ''; }, 3000);
+  });
+}
+
+loadAvailability();
+
+// ═══════════════════════════════════════════════════════
+// NEWSLETTERS
+// ═══════════════════════════════════════════════════════
+
+const newsletterForm = document.getElementById('upload-newsletter-form') as HTMLFormElement;
+const newsletterTitle = document.getElementById('newsletter-title') as HTMLInputElement;
+const newsletterDate = document.getElementById('newsletter-date') as HTMLInputElement;
+const newsletterPdf = document.getElementById('newsletter-pdf') as HTMLInputElement;
+const uploadNewsletterError = document.getElementById('upload-newsletter-error') as HTMLDivElement;
+
+newsletterForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  uploadNewsletterError.textContent = '';
+
+  const file = newsletterPdf.files?.[0];
+  if (!file) return;
+
   const fileName = `${Date.now()}-${file.name}`;
-  const { data: uploadData, error: uploadErr } = await supabase.storage
+  const { error: uploadError } = await supabase.storage
     .from('newsletters')
     .upload(fileName, file);
 
-  if (uploadErr) {
-    uploadError.textContent = 'Error uploading file. Please try again.';
-    uploadProgress.style.display = 'none';
-    console.log(uploadErr);
+  if (uploadError) {
+    uploadNewsletterError.textContent = 'Error uploading PDF.';
     return;
   }
 
-  // Get public URL
-  const { data: urlData } = supabase.storage
-    .from('newsletters')
-    .getPublicUrl(fileName);
+  const { data: urlData } = supabase.storage.from('newsletters').getPublicUrl(fileName);
 
-  // Save to database
   const { error: dbError } = await supabase.from('newsletters').insert({
     title: newsletterTitle.value,
     date: newsletterDate.value,
@@ -174,92 +324,36 @@ uploadForm.addEventListener('submit', async (e) => {
   });
 
   if (dbError) {
-    uploadError.textContent = 'Error saving newsletter. Please try again.';
-    uploadProgress.style.display = 'none';
-    console.log(dbError);
-    return;
+    uploadNewsletterError.textContent = 'Error saving newsletter.';
+  } else {
+    newsletterForm.reset();
   }
-
-  uploadProgress.style.display = 'none';
-  uploadForm.reset();
-  loadNewsletters();
 });
 
-loadNewsletters();
+// ═══════════════════════════════════════════════════════
+// VIRTUAL TOUR VIDEO
+// ═══════════════════════════════════════════════════════
 
-// Video upload
 const videoForm = document.getElementById('upload-video-form') as HTMLFormElement;
-const videoFile = document.getElementById('video-file') as HTMLInputElement;
-const videoError = document.getElementById('upload-video-error') as HTMLDivElement;
-const videoProgress = document.getElementById('upload-video-progress') as HTMLDivElement;
-const currentVideo = document.getElementById('current-video') as HTMLDivElement;
-
-async function loadCurrentVideo() {
-  const { data } = await supabase.storage.from('videos').list();
-  
-  if (!data || data.length === 0) {
-    currentVideo.innerHTML = '<p class="admin-loading">No video uploaded yet.</p>';
-    return;
-  }
-
-  const video = data[0];
-  const { data: urlData } = supabase.storage.from('videos').getPublicUrl(video.name);
-
-  currentVideo.innerHTML = `
-    <div class="event-list-item">
-      <div class="event-list-item-details">
-        <h3>Current Video</h3>
-        <p>${video.name}</p>
-      </div>
-      <div style="display:flex;gap:0.5rem">
-        <a href="${urlData.publicUrl}" target="_blank" class="btn-primary" style="font-size:var(--font-size-caption);padding:0.4rem 0.75rem">Preview</a>
-        <button class="event-delete-btn" id="delete-video-btn" data-name="${video.name}">Delete</button>
-      </div>
-    </div>
-  `;
-
-  document.getElementById('delete-video-btn')?.addEventListener('click', async () => {
-    if (confirm('Are you sure you want to delete the current video?')) {
-      await supabase.storage.from('videos').remove([video.name]);
-      loadCurrentVideo();
-    }
-  });
-}
+const tourVideo = document.getElementById('tour-video') as HTMLInputElement;
+const uploadVideoError = document.getElementById('upload-video-error') as HTMLDivElement;
 
 videoForm.addEventListener('submit', async (e) => {
   e.preventDefault();
-  videoError.textContent = '';
-  videoProgress.style.display = 'block';
+  uploadVideoError.textContent = '';
 
-  const file = videoFile.files?.[0];
-  if (!file) {
-    videoError.textContent = 'Please select a video file.';
-    videoProgress.style.display = 'none';
-    return;
-  }
+  const file = tourVideo.files?.[0];
+  if (!file) return;
 
-  // Delete existing video first
-  const { data: existing } = await supabase.storage.from('videos').list();
-  if (existing && existing.length > 0) {
-    await supabase.storage.from('videos').remove(existing.map(f => f.name));
-  }
-
-  // Upload new video
-  const fileName = `tour-video-${Date.now()}.mp4`;
-  const { error: uploadErr } = await supabase.storage
+  const { error: uploadError } = await supabase.storage
     .from('videos')
-    .upload(fileName, file);
+    .upload('virtual-tour.mp4', file, { upsert: true });
 
-  if (uploadErr) {
-    videoError.textContent = 'Error uploading video. Please try again.';
-    videoProgress.style.display = 'none';
-    console.log(uploadErr);
-    return;
+  if (uploadError) {
+    uploadVideoError.textContent = 'Error uploading video.';
+  } else {
+    videoForm.reset();
+    uploadVideoError.textContent = '';
+    alert('Video uploaded successfully.');
   }
-
-  videoProgress.style.display = 'none';
-  videoForm.reset();
-  loadCurrentVideo();
 });
-
-loadCurrentVideo();

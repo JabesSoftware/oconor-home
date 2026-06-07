@@ -48,33 +48,30 @@
 
         <p class="availability-note"><!-- TODO: Update availability regularly --> Availability is updated regularly. Please contact our team directly to confirm current availability and arrange a visit.</p>
 
-        <div class="availability-grid">
+       <div class="availability-grid">
 
-          <div class="availability-card availability-card--available">
-            <div class="availability-status">Available</div>
-            <h3>Residential Care</h3>
-            <p>Single room with ensuite. Full residential care including meals, personal care, and activities.</p>
-            <p class="availability-count"><!-- TODO: Update --> 3 rooms available</p>
-            <a href="contact.html" class="btn-primary">Enquire Now</a>
-          </div>
+  <div class="availability-card availability-card--available" id="avail-rest-home">
+    <h3>Rest Home</h3>
+    <span class="availability-status">Available</span>
+    <p>Residential rest home care for those who need support with daily living.</p>
+    <p class="availability-note-text"></p>
+  </div>
 
-          <div class="availability-card availability-card--limited">
-            <div class="availability-status">Limited</div>
-            <h3>Hospital-Level Care</h3>
-            <p>Specialist nursing care for residents with complex medical needs. 24-hour nursing supervision.</p>
-            <p class="availability-count"><!-- TODO: Update --> 1 room available</p>
-            <a href="contact.html" class="btn-primary">Enquire Now</a>
-          </div>
+  <div class="availability-card availability-card--limited" id="avail-hospital">
+    <h3>Hospital Level</h3>
+    <span class="availability-status">Limited</span>
+    <p>Higher-level clinical care for those with complex medical needs.</p>
+    <p class="availability-note-text"></p>
+  </div>
 
-          <div class="availability-card availability-card--waitlist">
-            <div class="availability-status">Waitlist</div>
-            <h3>Dementia Care</h3>
-            <p>Specialised memory care in a secure, purpose-designed environment with trained dementia staff.</p>
-            <p class="availability-count"><!-- TODO: Update --> Currently full — join waitlist</p>
-            <a href="contact.html" class="btn-primary">Join Waitlist</a>
-          </div>
+  <div class="availability-card availability-card--waitlist" id="avail-dementia">
+    <h3>Dementia Care</h3>
+    <span class="availability-status">Waitlist</span>
+    <p>Secure, specialist dementia care in a calm and familiar environment.</p>
+    <p class="availability-note-text"></p>
+  </div>
 
-        </div>
+</div>
 
         <div class="availability-cta">
           <h2>Not sure which care type is right?</h2>
@@ -119,6 +116,6 @@
       </div>
     </div>
   </footer>
-
+ <script type="module" src="../src/scripts/availability.ts"></script>
 </body>
 </html>

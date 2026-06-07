@@ -4,141 +4,196 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Admin — Events Manager — O'Conor Home</title>
+  <title>Admin — O'Conor Home</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="../src/styles/main.css" />
 </head>
 
 <body>
 
   <header>
- <div class="logo">
-  <a href="../index.html">
-    <img src="../src/assets/images/logo.png" alt="O'Conor Home" />
-  </a>
-</div>
-    <button id="logout-btn">Log Out</button>
+    <div class="logo">
+      <a href="../index.html">
+        <img src="../src/assets/images/logo.png" alt="O'Conor Home" />
+      </a>
+    </div>
+    <nav aria-label="Main navigation">
+      <ul>
+        <li><a href="stories.html">Stories</a></li>
+        <li><a href="virtual-tour.html">Virtual Tour</a></li>
+        <li><a href="news.html">News</a></li>
+        <li><a href="events.html">Events</a></li>
+        <li><a href="faq.html">FAQ</a></li>
+        <li><a href="availability.html">Availability</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><a href="donate.html">Donate</a></li>
+        <li><button id="logout-btn">Log out</button></li>
+      </ul>
+    </nav>
   </header>
 
   <main>
+
     <section class="admin-section">
       <div class="admin-inner">
 
         <div class="admin-header">
-          <h1>Events Manager</h1>
-          <p>Add, edit, and delete upcoming events. Changes appear on the website immediately.</p>
+          <h1>Staff Admin</h1>
+          <p>Manage events, newsletters, FAQ, and availability.</p>
+          <div class="admin-nav-links">
+  <a href="admin-events.html" class="active">Events & FAQ</a>
+  <a href="admin-stories.html">Stories</a>
+</div>
         </div>
 
-        <!-- Add Event Form -->
+        <!-- ── Events ─────────────────────────────── -->
         <div class="admin-card">
-          <h2>Add New Event</h2>
+          <h2>Events</h2>
           <form id="add-event-form">
-
-            <div class="form-group">
-              <label for="event-title">Event Title</label>
-              <input type="text" id="event-title" placeholder="e.g. Morning Tea with Families" required />
-            </div>
-
             <div class="admin-form-row">
+              <div class="form-group">
+                <label for="event-title">Title</label>
+                <input type="text" id="event-title" placeholder="Event title" required />
+              </div>
               <div class="form-group">
                 <label for="event-date">Date</label>
                 <input type="date" id="event-date" required />
               </div>
+            </div>
+            <div class="admin-form-row">
               <div class="form-group">
                 <label for="event-time">Time (optional)</label>
-                <input type="text" id="event-time" placeholder="e.g. 10:00am" />
+                <input type="text" id="event-time" placeholder="e.g. 2:00 PM" />
+              </div>
+              <div class="form-group">
+                <label for="event-location">Location (optional)</label>
+                <input type="text" id="event-location" placeholder="e.g. Main Lounge" />
               </div>
             </div>
-
-            <div class="form-group">
-              <label for="event-location">Location (optional)</label>
-              <input type="text" id="event-location" placeholder="e.g. Main Lounge" />
-            </div>
-
             <div class="form-group">
               <label for="event-description">Description (optional)</label>
-              <textarea id="event-description" rows="3" placeholder="Brief description of the event..."></textarea>
+              <textarea id="event-description" rows="2" placeholder="Brief description..."></textarea>
             </div>
-
             <div id="add-event-error"></div>
-            <button type="submit" id="add-event-btn">Add Event</button>
+            <button type="submit">Add Event</button>
+          </form>
+          <div id="events-list" style="margin-top:1.5rem;">
+            <p class="admin-loading">Loading events...</p>
+          </div>
+        </div>
 
+        <!-- ── FAQ ───────────────────────────────── -->
+        <div class="admin-card">
+          <h2>FAQ Questions</h2>
+          <form id="add-faq-form">
+            <div class="form-group">
+              <label for="faq-category">Category</label>
+              <select id="faq-category">
+                <option value="General">General</option>
+                <option value="Dementia Care">Dementia Care</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="faq-question">Question</label>
+              <input type="text" id="faq-question" placeholder="Enter the question..." required />
+            </div>
+            <div class="form-group">
+              <label for="faq-answer">Answer</label>
+              <textarea id="faq-answer" rows="3" placeholder="Enter the answer..." required></textarea>
+            </div>
+            <div id="add-faq-error"></div>
+            <button type="submit">Add FAQ</button>
+          </form>
+          <div id="faq-list" style="margin-top:1.5rem;">
+            <p class="admin-loading">Loading FAQ...</p>
+          </div>
+        </div>
+
+        <!-- ── Availability ───────────────────────── -->
+        <div class="admin-card">
+          <h2>Bed Availability</h2>
+          <p style="color:var(--color-grey);margin-bottom:1.5rem;">Update the availability status shown on the public Availability page.</p>
+          <div id="availability-form-container">
+            <p class="admin-loading">Loading availability...</p>
+          </div>
+          <div id="availability-error"></div>
+        </div>
+
+        <!-- ── Newsletters ────────────────────────── -->
+        <div class="admin-card">
+          <h2>Upload Newsletter</h2>
+          <form id="upload-newsletter-form">
+            <div class="admin-form-row">
+              <div class="form-group">
+                <label for="newsletter-title">Title</label>
+                <input type="text" id="newsletter-title" placeholder="e.g. Winter 2026" required />
+              </div>
+              <div class="form-group">
+                <label for="newsletter-date">Date</label>
+                <input type="date" id="newsletter-date" required />
+              </div>
+            </div>
+            <div class="form-group">
+              <label for="newsletter-pdf">PDF File</label>
+              <input type="file" id="newsletter-pdf" accept=".pdf" required />
+            </div>
+            <div id="upload-newsletter-error"></div>
+            <button type="submit">Upload Newsletter</button>
           </form>
         </div>
 
-        <!-- Events List -->
+        <!-- ── Virtual Tour Video ─────────────────── -->
         <div class="admin-card">
-          <h2>Current Events</h2>
-          <div id="events-list">
-            <p class="admin-loading">Loading events...</p>
-          </div>
+          <h2>Upload Virtual Tour Video</h2>
+          <form id="upload-video-form">
+            <div class="form-group">
+              <label for="tour-video">Video File</label>
+              <input type="file" id="tour-video" accept="video/*" required />
+            </div>
+            <div id="upload-video-error"></div>
+            <button type="submit">Upload Video</button>
+          </form>
         </div>
 
       </div>
     </section>
 
-    <!-- Newsletter Upload -->
-<div class="admin-card">
-  <h2>Upload Newsletter</h2>
-  <form id="upload-newsletter-form">
-
-    <div class="form-group">
-      <label for="newsletter-title">Newsletter Title</label>
-      <input type="text" id="newsletter-title" placeholder="e.g. Winter 2025 Newsletter" required />
-    </div>
-
-    <div class="form-group">
-      <label for="newsletter-date">Date</label>
-      <input type="date" id="newsletter-date" required />
-    </div>
-
-    <div class="form-group">
-      <label for="newsletter-pdf">PDF File</label>
-      <input type="file" id="newsletter-pdf" accept=".pdf" required />
-    </div>
-
-    <div id="upload-newsletter-error"></div>
-    <div id="upload-progress" style="display:none">
-      <p class="admin-loading">Uploading...</p>
-    </div>
-    <button type="submit" id="upload-newsletter-btn">Upload Newsletter</button>
-
-  </form>
-</div>
-
-<!-- Newsletters List -->
-<div class="admin-card">
-  <h2>Current Newsletters</h2>
-  <div id="newsletters-list">
-    <p class="admin-loading">Loading newsletters...</p>
-  </div>
-</div>
-
-<!-- Video Upload -->
-<div class="admin-card">
-  <h2>Virtual Tour Video</h2>
-  <p>Upload a single video for the virtual tour page. This will replace any existing video.</p>
-  <form id="upload-video-form">
-
-    <div class="form-group">
-      <label for="video-file">Video File (MP4 recommended)</label>
-      <input type="file" id="video-file" accept="video/*" required />
-    </div>
-
-    <div id="upload-video-error"></div>
-    <div id="upload-video-progress" style="display:none">
-      <p class="admin-loading">Uploading video — this may take a moment...</p>
-    </div>
-    <button type="submit" id="upload-video-btn">Upload Video</button>
-
-  </form>
-
-  <div id="current-video" style="margin-top:1.5rem">
-    <p class="admin-loading">Checking for existing video...</p>
-
   </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>O'Conor Home</h3>
+          <p>Caring for our community since 1918. This is your home — not ours.</p>
+          <p class="footer-legal">The O'Conor Institute Trust Board<br>Registered Charity CC39255</p>
+        </div>
+        <div class="footer-col">
+          <h3>Quick Links</h3>
+          <ul>
+            <li><a href="stories.html">Stories</a></li>
+            <li><a href="events.html">Events</a></li>
+            <li><a href="faq.html">FAQ</a></li>
+            <li><a href="availability.html">Availability</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="donate.html">Donate</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Contact</h3>
+          <p>190 Queen Street<br>Westport 7825<br>New Zealand</p>
+          <p>Phone: <a href="tel:037888210">03 788 8210</a></p>
+          <p>Email: <a href="mailto:susan@oconorhome.co.nz">susan@oconorhome.co.nz</a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 The O'Conor Institute Trust Board. All rights reserved.</p>
+        <p>Registered Charity CC39255</p>
+      </div>
+    </div>
+  </footer>
 
   <script type="module" src="../src/scripts/admin-events.ts"></script>
 

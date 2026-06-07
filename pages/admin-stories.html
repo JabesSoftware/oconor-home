@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manage Stories — O'Conor Home</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../src/styles/main.css" />
+</head>
+
+<body>
+
+  <header>
+    <div class="logo">
+      <a href="../index.html">
+        <img src="../src/assets/images/logo.png" alt="O'Conor Home" />
+      </a>
+    </div>
+    <nav aria-label="Main navigation">
+      <ul>
+        <li><a href="admin-events.html">← Back to Admin</a></li>
+        <li><button id="logout-btn">Log out</button></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main>
+    <section class="admin-section">
+      <div class="admin-inner">
+
+        <div class="admin-header">
+          <h1>Manage Stories</h1>
+          <p>Add, edit, or remove resident stories shown on the public Stories page.</p>
+
+          <div class="admin-nav-links">
+  <a href="admin-events.html" class="active">Events & FAQ</a>
+  <a href="admin-stories.html">Stories</a>
+</div>
+
+        </div>
+
+        <!-- Form -->
+        <div class="admin-card">
+          <h2 id="story-form-title">Add New Story</h2>
+          <form id="story-form">
+
+            <input type="hidden" id="story-id" />
+            <input type="hidden" id="current-photo-url" />
+
+            <div class="form-group">
+              <label for="story-name">Resident Name</label>
+              <input type="text" id="story-name" placeholder="e.g. Bill Currie" required />
+            </div>
+
+            <div class="form-group">
+              <label for="story-blurb">Short Blurb</label>
+              <textarea id="story-blurb" rows="2" placeholder="One or two sentences shown on the story card..." required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="story-body">Full Story</label>
+              <textarea id="story-body" rows="8" placeholder="The full story shown in the modal. Use blank lines to separate paragraphs." required></textarea>
+            </div>
+
+            <div class="form-group">
+              <label for="story-photo">Photo</label>
+              <input type="file" id="story-photo" accept="image/*" />
+              <p style="color:var(--color-grey);font-size:var(--font-size-caption);margin-top:0.5rem;margin-bottom:0;">Leave blank to keep existing photo when editing.</p>
+            </div>
+
+            <img id="story-photo-preview" src="" alt="Photo preview" style="display:none;width:120px;height:120px;object-fit:cover;border-radius:8px;margin-bottom:1rem;" />
+
+            <div id="story-form-error" style="color:red;font-size:var(--font-size-caption);margin-bottom:1rem;"></div>
+
+            <div style="display:flex;gap:1rem;">
+              <button type="submit">Add Story</button>
+              <button type="button" id="story-cancel-btn" style="display:none;background-color:transparent;color:var(--color-primaryMaroon);border:2px solid var(--color-primaryMaroon);">Cancel</button>
+            </div>
+
+          </form>
+        </div>
+
+        <!-- Stories list -->
+        <div class="admin-card">
+          <h2>Current Stories</h2>
+          <div id="stories-list">
+            <p class="admin-loading">Loading stories...</p>
+          </div>
+        </div>
+
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="footer-inner">
+      <div class="footer-grid">
+        <div class="footer-col">
+          <h3>O'Conor Home</h3>
+          <p>Caring for our community since 1918.</p>
+          <p class="footer-legal">The O'Conor Institute Trust Board<br>Registered Charity CC39255</p>
+        </div>
+        <div class="footer-col">
+          <h3>Admin</h3>
+          <ul>
+            <li><a href="admin-events.html">Events & FAQ</a></li>
+            <li><a href="admin-stories.html">Stories</a></li>
+          </ul>
+        </div>
+        <div class="footer-col">
+          <h3>Contact</h3>
+          <p>190 Queen Street<br>Westport 7825<br>New Zealand</p>
+          <p>Phone: <a href="tel:037888210">03 788 8210</a></p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>© 2026 The O'Conor Institute Trust Board. All rights reserved.</p>
+        <p>Registered Charity CC39255</p>
+      </div>
+    </div>
+  </footer>
+
+  <script type="module" src="../src/scripts/admin-stories.ts"></script>
+
+</body>
+</html>
