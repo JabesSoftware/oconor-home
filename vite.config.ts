@@ -20,6 +20,7 @@ export default defineConfig({
         adminEvents: 'pages/admin-events.html',
         news: 'pages/news.html',
         adminStories: 'pages/admin-stories.html',
+        documents: 'pages/documents.html',
       }
     }
   }

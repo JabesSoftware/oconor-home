@@ -7,7 +7,9 @@
   <title>Admin — O'Conor Home</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Open+Sans:wght@400;600&display=swap"
+    rel="stylesheet" />
   <link rel="stylesheet" href="../src/styles/main.css" />
 </head>
 
@@ -27,6 +29,7 @@
         <li><a href="events.html">Events</a></li>
         <li><a href="faq.html">FAQ</a></li>
         <li><a href="availability.html">Availability</a></li>
+        <li><a href="documents.html">Documents</a></li>
         <li><a href="contact.html">Contact</a></li>
         <li><a href="donate.html">Donate</a></li>
         <li><button id="logout-btn">Log out</button></li>
@@ -43,9 +46,9 @@
           <h1>Staff Admin</h1>
           <p>Manage events, newsletters, FAQ, and availability.</p>
           <div class="admin-nav-links">
-  <a href="admin-events.html" class="active">Events & FAQ</a>
-  <a href="admin-stories.html">Stories</a>
-</div>
+            <a href="admin-events.html" class="active">Events & FAQ</a>
+            <a href="admin-stories.html">Stories</a>
+          </div>
         </div>
 
         <!-- ── Events ─────────────────────────────── -->
@@ -114,7 +117,8 @@
         <!-- ── Availability ───────────────────────── -->
         <div class="admin-card">
           <h2>Bed Availability</h2>
-          <p style="color:var(--color-grey);margin-bottom:1.5rem;">Update the availability status shown on the public Availability page.</p>
+          <p style="color:var(--color-grey);margin-bottom:1.5rem;">Update the availability status shown on the public
+            Availability page.</p>
           <div id="availability-form-container">
             <p class="admin-loading">Loading availability...</p>
           </div>
@@ -157,6 +161,31 @@
           </form>
         </div>
 
+<!-- ── Documents ─────────────────────────────── -->
+<div class="admin-card">
+  <h2>Upload Document</h2>
+  <form id="upload-document-form">
+    <div class="form-group">
+      <label for="document-title">Title</label>
+      <input type="text" id="document-title" placeholder="e.g. Annual Report 2025" required />
+    </div>
+    <div class="form-group">
+      <label for="document-description">Description (optional)</label>
+      <input type="text" id="document-description" placeholder="Brief description..." />
+    </div>
+    <div class="form-group">
+      <label for="document-file">File (PDF or document)</label>
+      <input type="file" id="document-file" accept=".pdf,.doc,.docx" required />
+    </div>
+    <div id="upload-document-error"></div>
+    <button type="submit">Upload Document</button>
+  </form>
+  <div id="documents-admin-list" style="margin-top:1.5rem;">
+    <p class="admin-loading">Loading documents...</p>
+  </div>
+</div>
+
+
       </div>
     </section>
 
@@ -177,7 +206,8 @@
             <li><a href="events.html">Events</a></li>
             <li><a href="faq.html">FAQ</a></li>
             <li><a href="availability.html">Availability</a></li>
-            <li><a href="contact.html">Contact</a></li>
+            <li><a href="documents.html">Documents</a></li>
+        <li><a href="contact.html">Contact</a></li>
             <li><a href="donate.html">Donate</a></li>
           </ul>
         </div>
@@ -198,4 +228,5 @@
   <script type="module" src="../src/scripts/admin-events.ts"></script>
 
 </body>
+
 </html>

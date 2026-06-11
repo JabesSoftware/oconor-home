@@ -357,3 +357,81 @@ videoForm.addEventListener('submit', async (e) => {
     alert('Video uploaded successfully.');
   }
 });
+
+// ═══════════════════════════════════════════════════════
+// DOCUMENTS
+// ═══════════════════════════════════════════════════════
+
+const documentForm = document.getElementById('upload-document-form') as HTMLFormElement;
+const documentTitle = document.getElementById('document-title') as HTMLInputElement;
+const documentDescription = document.getElementById('document-description') as HTMLInputElement;
+const documentFile = document.getElementById('document-file') as HTMLInputElement;
+const uploadDocumentError = document.getElementById('upload-document-error') as HTMLDivElement;
+const documentsAdminList = document.getElementById('documents-admin-list') as HTMLDivElement;
+
+async function loadAdminDocuments() {
+  const { data, error } = await supabase
+    .from('documents')
+    .select('*')
+    .order('created_at', { ascending: false });
+
+  if (error || !data || data.length === 0) {
+    documentsAdminList.innerHTML = '<p class="admin-loading">No documents yet.</p>';
+    return;
+  }
+
+  documentsAdminList.innerHTML = data.map(doc => `
+    <div class="event-list-item">
+      <div class="event-list-item-details">
+        <h3>${doc.title}</h3>
+        ${doc.description ? `<p>${doc.description}</p>` : ''}
+      </div>
+      <button class="event-delete-btn" data-id="${doc.id}">Delete</button>
+    </div>
+  `).join('');
+
+  documentsAdminList.querySelectorAll('.event-delete-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const id = (btn as HTMLElement).dataset['id'];
+      if (confirm('Delete this document?')) {
+        await supabase.from('documents').delete().eq('id', id);
+        loadAdminDocuments();
+      }
+    });
+  });
+}
+
+documentForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  uploadDocumentError.textContent = '';
+
+  const file = documentFile.files?.[0];
+  if (!file) return;
+
+  const fileName = `${Date.now()}-${file.name.replace(/\s+/g, '-')}`;
+  const { error: uploadError } = await supabase.storage
+    .from('documents')
+    .upload(fileName, file);
+
+  if (uploadError) {
+    uploadDocumentError.textContent = 'Error uploading file.';
+    return;
+  }
+
+  const { data: urlData } = supabase.storage.from('documents').getPublicUrl(fileName);
+
+  const { error: dbError } = await supabase.from('documents').insert({
+    title: documentTitle.value,
+    description: documentDescription.value || null,
+    file_url: urlData.publicUrl,
+  });
+
+  if (dbError) {
+    uploadDocumentError.textContent = 'Error saving document.';
+  } else {
+    documentForm.reset();
+    loadAdminDocuments();
+  }
+});
+
+loadAdminDocuments();
