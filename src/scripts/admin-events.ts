@@ -1,19 +1,19 @@
 import { createClient } from '@supabase/supabase-js';
 
-// Redirect if not authenticated
-if (sessionStorage.getItem('admin-authenticated') !== 'true') {
-  window.location.href = 'admin-login.html';
-}
-
 const supabase = createClient(
   import.meta.env.VITE_SUPABASE_URL,
   import.meta.env.VITE_SUPABASE_PUBLIC
 );
 
+const { data: { session } } = await supabase.auth.getSession();
+if (!session) {
+  window.location.href = 'admin-login.html';
+}
+
 // ─── Logout ───────────────────────────────────────────
 const logoutBtn = document.getElementById('logout-btn') as HTMLButtonElement;
-logoutBtn.addEventListener('click', () => {
-  sessionStorage.removeItem('admin-authenticated');
+logoutBtn.addEventListener('click', async () => {
+  await supabase.auth.signOut();
   window.location.href = 'admin-login.html';
 });
 
