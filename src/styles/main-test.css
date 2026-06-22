@@ -22,11 +22,11 @@
   --font-size-lead: 1rem;
   --font-size-body: 0.9rem;
   --font-size-caption: 0.75rem;
-
-  /* Page background */
-  --page-bg: #FAF0F2;
+  --page-bg: #FBF6F0;
+  --page-alt: #FFFFFF;
   --card-bg: #FFFFFF;
-  --card-border: rgba(221, 168, 181, 0.3);
+  --card-border: rgba(201, 168, 76, 0.2);
+  color-scheme: light;
 }
 
 /* ─── Reset ──────────────────────────────────────────── */
@@ -100,56 +100,67 @@ button:hover { background-color: var(--color-midMaroon); color: var(--color-crea
 
 .btn-secondary {
   background-color: transparent;
-  color: var(--color-cream);
-  border: 2px solid var(--color-warmGold);
+  color: var(--color-primaryMaroon);
+  border: 2px solid var(--color-primaryMaroon);
   padding: 0.75rem 2rem;
   border-radius: 6px;
   text-decoration: none;
   font-size: var(--font-size-body);
   font-family: var(--font-body);
   display: inline-block;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, color 0.3s ease;
   font-weight: 600;
 }
-.btn-secondary:hover { background-color: rgba(250, 245, 239, 0.2); }
+.btn-secondary:hover { background-color: var(--color-primaryMaroon); color: var(--color-cream); }
 
 .btn-group { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; margin-top: 1rem; }
 
-/* ─── Section base — all transparent, body colour shows through ── */
+/* ─── Alternating Section Backgrounds ───────────────── */
 
-.intro,
-.testimonial-preview,
-.events-preview,
-.donor-wall,
-.social-feed,
-.stories,
-.events-section,
-.faq-section,
-.faq-section--dementia,
-.contact-section,
-.donate-section,
-.giving-menu,
-.case-for-buller,
-.donors-section,
-.newsletters-section,
-.tour-section,
-.tour-video-section,
-.project-section,
-.availability-section,
-.documents-section,
-.admin-section,
-.admin-login-section {
-  background: transparent;
+.intro                    { background-color: var(--page-bg); }
+.values                   { background-color: var(--page-alt); }
+.testimonial-preview      { background-color: var(--page-bg); }
+.events-preview           { background-color: var(--page-alt); }
+.project-overview-preview { background-color: var(--page-bg); }
+.donate-cta               { background-color: var(--page-alt); }
+.donor-wall               { background-color: var(--page-bg); }
+.social-feed              { background-color: var(--page-alt); }
+.stories                  { background-color: var(--page-bg); }
+.events-section           { background-color: var(--page-alt); }
+.faq-section              { background-color: var(--page-bg); }
+.faq-section--dementia    { background-color: var(--page-alt); }
+.contact-section          { background-color: var(--page-bg); }
+.donate-section           { background-color: var(--page-alt); }
+.giving-menu              { background-color: var(--page-bg); }
+.case-for-buller          { background-color: var(--page-alt); }
+.donors-section           { background-color: var(--page-bg); }
+.newsletters-section      { background-color: var(--page-alt); }
+.tour-section             { background-color: var(--page-bg); }
+.tour-video-section       { background-color: var(--page-alt); }
+.project-section          { background-color: var(--page-bg); }
+.availability-section     { background-color: var(--page-alt); }
+.documents-section        { background-color: var(--page-bg); }
+.admin-section            { background-color: var(--page-bg); min-height: 80vh; }
+.admin-login-section      { background-color: var(--page-bg); min-height: 80vh; display: flex; align-items: center; }
+
+/* ─── Section padding ────────────────────────────────── */
+
+.intro, .values, .testimonial-preview, .events-preview,
+.project-overview-preview, .donate-cta, .donor-wall, .social-feed,
+.stories, .events-section, .faq-section, .contact-section,
+.donate-section, .giving-menu, .case-for-buller, .donors-section,
+.newsletters-section, .tour-section, .tour-video-section,
+.project-section, .availability-section, .documents-section {
+  padding: 6rem 2rem;
 }
 
-/* ─── Accent sections — very soft white panel ────────── */
-
-.values,
-.donate-cta,
-.project-overview-preview {
-  background-color: #FFFFFF;
-  box-shadow: inset 0 1px 0 rgba(221, 168, 181, 0.2), inset 0 -1px 0 rgba(221, 168, 181, 0.2);
+.testimonial-preview, .events-preview, .project-overview-preview, .donate-cta {
+  padding: 6rem 3rem;
 }
+
+.admin-section, .admin-login-section { padding: 4rem 2rem; }
+
+/* ─── Values ─────────────────────────────────────────── */
 
 .values .value-card {
   background-color: var(--page-bg);
@@ -158,48 +169,24 @@ button:hover { background-color: var(--color-midMaroon); color: var(--color-crea
 }
 .values .value-card h3 { color: var(--color-primaryMaroon); }
 .values .value-card p { color: var(--color-nearBlack); }
+.values .value-card:hover { box-shadow: 0 4px 20px rgba(107, 30, 46, 0.08); }
+
+/* ─── Donate CTA text ────────────────────────────────── */
 
 .donate-cta-inner h2 { color: var(--color-primaryMaroon); }
 .donate-cta-inner p { color: var(--color-nearBlack); }
+
+/* ─── Project Overview text ──────────────────────────── */
 
 .project-overview-inner h2 { color: var(--color-primaryMaroon); }
 .project-overview-inner p { color: var(--color-nearBlack); }
 .project-overview-inner a { color: var(--color-primaryMaroon); text-decoration: none; font-weight: 600; border-bottom: 2px solid var(--color-warmGold); display: inline-block; transition: color 0.3s ease; }
 
-/* ─── Section padding ────────────────────────────────── */
-
-.intro { padding: 6rem 2rem; }
-.values { padding: 6rem 2rem; }
-.testimonial-preview { padding: 6rem 3rem; }
-.events-preview { padding: 6rem 3rem; }
-.project-overview-preview { padding: 6rem 3rem; }
-.donate-cta { padding: 6rem 3rem; }
-.donor-wall { padding: 6rem 2rem; }
-.social-feed { padding: 6rem 2rem; }
-.stories { padding: 6rem 2rem; }
-.events-section { padding: 6rem 2rem; }
-.faq-section { padding: 6rem 2rem; }
-.contact-section { padding: 6rem 2rem; }
-.donate-section { padding: 6rem 2rem; }
-.giving-menu { padding: 6rem 2rem; }
-.case-for-buller { padding: 6rem 2rem; }
-.donors-section { padding: 6rem 2rem; }
-.newsletters-section { padding: 6rem 2rem; }
-.tour-section { padding: 6rem 2rem; }
-.tour-video-section { padding: 6rem 2rem; }
-.project-section { padding: 6rem 2rem; }
-.availability-section { padding: 6rem 2rem; }
-.documents-section { padding: 6rem 2rem; }
-.admin-section { min-height: 80vh; padding: 4rem 2rem; }
-.admin-login-section { min-height: 80vh; display: flex; align-items: center; padding: 4rem 2rem; }
-
 /* ─── Hero ───────────────────────────────────────────── */
 
 .main-header {
   min-height: 100vh;
-  background:
-    linear-gradient(rgba(107, 30, 46, 0.45), rgba(30, 10, 16, 0.65)),
-    url('/src/assets/images/flap_aerial.png');
+  background: url('/src/assets/images/flap_aerial.png');
   background-size: cover;
   background-position: center;
   display: flex;
@@ -207,8 +194,21 @@ button:hover { background-color: var(--color-midMaroon); color: var(--color-crea
   justify-content: center;
   padding: 4rem 2rem;
 }
-.main-header-inner { max-width: 800px; width: 100%; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
-.hero-tagline { color: var(--color-dustyRose); font-size: var(--font-size-caption); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0; text-shadow: 0 1px 8px rgba(30, 10, 16, 0.7); }
+
+.main-header-inner {
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.5rem;
+  background-color: rgba(30, 10, 16, 0.72);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  border-radius: 12px;
+  padding: 3rem;
+  backdrop-filter: blur(2px);
+}.hero-tagline { color: var(--color-dustyRose); font-size: var(--font-size-caption); letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 0; text-shadow: 0 1px 8px rgba(30, 10, 16, 0.7); }
 .main-header h1 { color: var(--color-cream); font-style: italic; font-size: clamp(1.5rem, 4vw, 2.5rem); margin-bottom: 0; text-shadow: 0 2px 12px rgba(30, 10, 16, 0.8); }
 .hero-sub { color: var(--color-midRose); font-size: var(--font-size-lead); margin-bottom: 0; letter-spacing: 0.05em; text-shadow: 0 1px 8px rgba(30, 10, 16, 0.7); }
 
@@ -224,7 +224,6 @@ button:hover { background-color: var(--color-midMaroon); color: var(--color-crea
 
 .values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; max-width: 1200px; margin: 0 auto; }
 .value-card { padding: 2rem; border-radius: 10px; text-align: center; transition: box-shadow 0.3s ease; }
-.value-card:hover { box-shadow: 0 4px 20px rgba(107, 30, 46, 0.08); }
 .value-icon { font-size: 2rem; display: block; margin-bottom: 1rem; }
 
 /* ─── Testimonial ────────────────────────────────────── */
@@ -276,7 +275,7 @@ button:hover { background-color: var(--color-midMaroon); color: var(--color-crea
 .social-feed-inner h2 { color: var(--color-primaryMaroon); margin-bottom: 0; }
 .social-feed-inner > p { color: var(--color-grey); margin-bottom: 0; }
 .social-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; text-align: left; }
-.social-card { background-color: var(--card-bg); border: 1px solid var(--card-border); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 2px 12px rgba(107, 30, 46, 0.05); }
+.social-card { background-color: var(--page-bg); border: 1px solid var(--card-border); border-radius: 10px; overflow: hidden; display: flex; flex-direction: column; box-shadow: 0 2px 12px rgba(107, 30, 46, 0.05); }
 .social-card-header { display: flex; align-items: center; gap: 0.75rem; padding: 1rem; }
 .social-icon { font-size: 1.5rem; }
 .social-name { font-weight: 600; color: var(--color-nearBlack); font-size: var(--font-size-body); margin-bottom: 0; }
@@ -314,7 +313,7 @@ footer { background-color: var(--color-deepWine); padding: 4rem 2rem 2rem; }
 /* ─── Stories ────────────────────────────────────────── */
 
 .stories-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 2rem; max-width: 1200px; margin: 0 auto; }
-.story-card { background-color: var(--card-bg); border-radius: 10px; overflow: hidden; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; border: 1px solid var(--card-border); box-shadow: 0 2px 12px rgba(107, 30, 46, 0.05); }
+.story-card { background-color: var(--page-bg); border-radius: 10px; overflow: hidden; cursor: pointer; transition: transform 0.3s ease, box-shadow 0.3s ease; border: 1px solid var(--card-border); box-shadow: 0 2px 12px rgba(107, 30, 46, 0.05); }
 .story-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(107, 30, 46, 0.12); }
 .story-card-image img { width: 100%; height: 600px; object-fit: cover; object-position: center top; display: block; }
 .story-card-content { padding: 1.5rem; }
@@ -538,7 +537,7 @@ footer { background-color: var(--color-deepWine); padding: 4rem 2rem 2rem; }
 
 /* ─── How to Give ────────────────────────────────────── */
 
-.how-to-give { display: flex; flex-direction: column; align-items: center; gap: 2rem; text-align: center; padding: 3rem 0; border-top: 1px solid rgba(221, 168, 181, 0.3); margin-top: 1rem; }
+.how-to-give { display: flex; flex-direction: column; align-items: center; gap: 2rem; text-align: center; padding: 3rem 0; border-top: 1px solid var(--card-border); margin-top: 1rem; }
 .how-to-give h3 { font-family: var(--font-heading); font-size: var(--font-size-h2); color: var(--color-primaryMaroon); margin-bottom: 0; }
 .how-to-give > p { color: var(--color-grey); max-width: 700px; margin: 0 auto; }
 .give-options { display: flex; flex-direction: column; align-items: center; gap: 1.5rem; }
@@ -572,14 +571,26 @@ footer { background-color: var(--color-deepWine); padding: 4rem 2rem 2rem; }
 
 .donate-hero {
   background:
-    linear-gradient(rgba(107, 30, 46, 0.45), rgba(30, 10, 16, 0.65)),
+      linear-gradient(rgba(30, 10, 16, 0.75), rgba(30, 10, 16, 0.88)),
     url('/src/assets/images/flap_aerial.png');
   background-size: cover;
   background-position: center;
   padding: 8rem 2rem;
   text-align: center;
 }
-.donate-hero-inner { max-width: 700px; width: 100%; margin: 0 auto; display: flex; flex-direction: column; align-items: center; gap: 1.25rem; }
+.donate-hero-inner {
+  max-width: 700px;
+  width: 100%;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  background-color: rgba(30, 10, 16, 0.5);
+  border: 1px solid rgba(201, 168, 76, 0.3);
+  border-radius: 12px;
+  padding: 3rem;
+}
 .donate-hero-eyebrow { color: var(--color-dustyRose); font-size: var(--font-size-caption); letter-spacing: 0.08em; text-transform: uppercase; margin-bottom: 0; text-shadow: 0 1px 8px rgba(30, 10, 16, 0.7); }
 .donate-hero h1 { color: var(--color-cream); font-style: italic; font-size: clamp(2rem, 5vw, 3.5rem); margin-bottom: 0; line-height: 1.1; text-shadow: 0 2px 12px rgba(30, 10, 16, 0.8); }
 .donate-hero h1 em { font-style: italic; }
