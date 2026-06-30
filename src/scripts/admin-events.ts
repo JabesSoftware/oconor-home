@@ -24,17 +24,30 @@ logoutBtn.addEventListener('click', async () => {
 const eventForm = document.getElementById('add-event-form') as HTMLFormElement;
 const eventTitleInput = document.getElementById('event-title') as HTMLInputElement;
 const eventDateInput = document.getElementById('event-date') as HTMLInputElement;
+const eventDateTbc = document.getElementById('event-date-tbc') as HTMLInputElement;
 const eventTimeInput = document.getElementById('event-time') as HTMLInputElement;
 const eventLocationInput = document.getElementById('event-location') as HTMLInputElement;
 const eventDescriptionInput = document.getElementById('event-description') as HTMLTextAreaElement;
 const addEventError = document.getElementById('add-event-error') as HTMLDivElement;
 const eventsList = document.getElementById('events-list') as HTMLDivElement;
 
+eventDateTbc.addEventListener('change', () => {
+  eventDateInput.disabled = eventDateTbc.checked;
+  if (eventDateTbc.checked) eventDateInput.value = '';
+});
+
+function resetEventForm() {
+  eventForm.reset();
+  eventDateInput.disabled = false;
+  delete eventForm.dataset['editId'];
+  eventForm.querySelector('button[type="submit"]')!.textContent = 'Add Event';
+}
+
 async function loadEvents() {
   const { data, error } = await supabase
     .from('events')
     .select('*')
-    .order('date', { ascending: true });
+    .order('date', { ascending: true, nullsFirst: false });
 
   if (error) {
     eventsList.innerHTML = '<p style="color:red">Error loading events.</p>';
@@ -50,10 +63,19 @@ async function loadEvents() {
     <div class="event-list-item">
       <div class="event-list-item-details">
         <h3>${event.title}</h3>
-        <p>${event.date}${event.time ? ' at ' + event.time : ''}${event.location ? ' — ' + event.location : ''}</p>
+        <p>${event.date ? event.date : 'Date TBC'}${event.time ? ' at ' + event.time : ''}${event.location ? ' — ' + event.location : ''}</p>
         ${event.description ? `<p>${event.description}</p>` : ''}
       </div>
-      <button class="event-delete-btn" data-id="${event.id}">Delete</button>
+      <div style="display:flex;flex-direction:column;gap:0.5rem;flex-shrink:0;">
+        <button class="faq-edit-btn"
+          data-id="${event.id}"
+          data-title="${encodeURIComponent(event.title)}"
+          data-date="${event.date || ''}"
+          data-time="${encodeURIComponent(event.time || '')}"
+          data-location="${encodeURIComponent(event.location || '')}"
+          data-description="${encodeURIComponent(event.description || '')}">Edit</button>
+        <button class="event-delete-btn" data-id="${event.id}">Delete</button>
+      </div>
     </div>
   `).join('');
 
@@ -66,23 +88,64 @@ async function loadEvents() {
       }
     });
   });
+
+  document.querySelectorAll('.event-list-item .faq-edit-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const el = btn as HTMLElement;
+      eventTitleInput.value = decodeURIComponent(el.dataset['title'] || '');
+      eventTimeInput.value = decodeURIComponent(el.dataset['time'] || '');
+      eventLocationInput.value = decodeURIComponent(el.dataset['location'] || '');
+      eventDescriptionInput.value = decodeURIComponent(el.dataset['description'] || '');
+
+      const dateVal = el.dataset['date'] || '';
+      if (dateVal) {
+        eventDateInput.value = dateVal;
+        eventDateTbc.checked = false;
+        eventDateInput.disabled = false;
+      } else {
+        eventDateInput.value = '';
+        eventDateTbc.checked = true;
+        eventDateInput.disabled = true;
+      }
+
+      eventForm.dataset['editId'] = el.dataset['id'];
+      eventForm.querySelector('button[type="submit"]')!.textContent = 'Save Changes';
+      eventTitleInput.focus();
+      eventForm.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
 }
 
 eventForm.addEventListener('submit', async (e) => {
   e.preventDefault();
   addEventError.textContent = '';
-  const { error } = await supabase.from('events').insert({
+
+  const eventData = {
     title: eventTitleInput.value,
-    date: eventDateInput.value,
+    date: eventDateTbc.checked ? null : (eventDateInput.value || null),
     time: eventTimeInput.value || null,
     location: eventLocationInput.value || null,
     description: eventDescriptionInput.value || null,
-  });
-  if (error) {
-    addEventError.textContent = 'Error adding event.';
+  };
+
+  const editId = eventForm.dataset['editId'];
+
+  if (editId) {
+    const { error } = await supabase.from('events').update(eventData).eq('id', editId);
+    if (error) {
+      addEventError.textContent = 'Error updating event.';
+    } else {
+      resetEventForm();
+      loadEvents();
+    }
   } else {
-    eventForm.reset();
-    loadEvents();
+    const { error } = await supabase.from('events').insert(eventData);
+    if (error) {
+      addEventError.textContent = 'Error adding event.';
+    } else {
+      resetEventForm();
+      loadEvents();
+    }
   }
 });
 
@@ -297,6 +360,44 @@ const newsletterTitle = document.getElementById('newsletter-title') as HTMLInput
 const newsletterDate = document.getElementById('newsletter-date') as HTMLInputElement;
 const newsletterPdf = document.getElementById('newsletter-pdf') as HTMLInputElement;
 const uploadNewsletterError = document.getElementById('upload-newsletter-error') as HTMLDivElement;
+const newslettersAdminList = document.getElementById('newsletters-admin-list') as HTMLDivElement;
+
+async function loadAdminNewsletters() {
+  const { data, error } = await supabase
+    .from('newsletters')
+    .select('*')
+    .order('date', { ascending: false });
+
+  if (error) {
+    newslettersAdminList.innerHTML = '<p style="color:red">Error loading newsletters.</p>';
+    return;
+  }
+
+  if (!data || data.length === 0) {
+    newslettersAdminList.innerHTML = '<p class="admin-loading">No newsletters yet.</p>';
+    return;
+  }
+
+  newslettersAdminList.innerHTML = data.map(n => `
+    <div class="event-list-item">
+      <div class="event-list-item-details">
+        <h3>${n.title}</h3>
+        <p>${n.date}</p>
+      </div>
+      <button class="event-delete-btn" data-id="${n.id}">Delete</button>
+    </div>
+  `).join('');
+
+  newslettersAdminList.querySelectorAll('.event-delete-btn').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const id = (btn as HTMLElement).dataset['id'];
+      if (confirm('Delete this newsletter?')) {
+        await supabase.from('newsletters').delete().eq('id', id);
+        loadAdminNewsletters();
+      }
+    });
+  });
+}
 
 newsletterForm.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -327,8 +428,11 @@ newsletterForm.addEventListener('submit', async (e) => {
     uploadNewsletterError.textContent = 'Error saving newsletter.';
   } else {
     newsletterForm.reset();
+    loadAdminNewsletters();
   }
 });
+
+loadAdminNewsletters();
 
 // ═══════════════════════════════════════════════════════
 // VIRTUAL TOUR VIDEO

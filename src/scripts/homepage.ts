@@ -6,11 +6,12 @@ const supabase = createClient(
 );
 
 async function loadUpcomingEvents() {
-  const { data, error } = await supabase
+const today = new Date().toISOString().split('T')[0];
+const { data, error } = await supabase
     .from('events')
     .select('*')
-    .gte('date', new Date().toISOString().split('T')[0])
-    .order('date', { ascending: true })
+    .or(`date.gte.${today},date.is.null`)
+    .order('date', { ascending: true, nullsFirst: false })
     .limit(3);
 
   const container = document.querySelector('.events-preview-inner');
@@ -26,7 +27,9 @@ async function loadUpcomingEvents() {
     ${data.map(event => `
       <div class="homepage-event-item">
         <span class="homepage-event-date">
-          ${new Date(event.date).toLocaleDateString('en-NZ', { weekday: 'short', day: 'numeric', month: 'long' })}
+         ${event.date
+  ? new Date(event.date).toLocaleDateString('en-NZ', { weekday: 'short', day: 'numeric', month: 'long' })
+  : 'Date TBC'}
         </span>
         <span class="homepage-event-title">${event.title}</span>
         ${event.time ? `<span class="homepage-event-time">${event.time}</span>` : ''}

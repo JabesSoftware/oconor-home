@@ -61,9 +61,13 @@
                 <input type="text" id="event-title" placeholder="Event title" required />
               </div>
               <div class="form-group">
-                <label for="event-date">Date</label>
-                <input type="date" id="event-date" required />
-              </div>
+  <label for="event-date">Date</label>
+  <input type="date" id="event-date" />
+  <label style="display:flex;align-items:center;gap:0.5rem;margin-top:0.5rem;font-weight:400;">
+    <input type="checkbox" id="event-date-tbc" style="width:auto;" />
+    Date TBC
+  </label>
+</div>
             </div>
             <div class="admin-form-row">
               <div class="form-group">
@@ -126,27 +130,31 @@
         </div>
 
         <!-- ── Newsletters ────────────────────────── -->
-        <div class="admin-card">
-          <h2>Upload Newsletter</h2>
-          <form id="upload-newsletter-form">
-            <div class="admin-form-row">
-              <div class="form-group">
-                <label for="newsletter-title">Title</label>
-                <input type="text" id="newsletter-title" placeholder="e.g. Winter 2026" required />
-              </div>
-              <div class="form-group">
-                <label for="newsletter-date">Date</label>
-                <input type="date" id="newsletter-date" required />
-              </div>
-            </div>
-            <div class="form-group">
-              <label for="newsletter-pdf">PDF File</label>
-              <input type="file" id="newsletter-pdf" accept=".pdf" required />
-            </div>
-            <div id="upload-newsletter-error"></div>
-            <button type="submit">Upload Newsletter</button>
-          </form>
-        </div>
+       <!-- ── Newsletters ────────────────────────── -->
+<div class="admin-card">
+  <h2>Upload Newsletter</h2>
+  <form id="upload-newsletter-form">
+    <div class="admin-form-row">
+      <div class="form-group">
+        <label for="newsletter-title">Title</label>
+        <input type="text" id="newsletter-title" placeholder="e.g. Winter 2026" required />
+      </div>
+      <div class="form-group">
+        <label for="newsletter-date">Date</label>
+        <input type="date" id="newsletter-date" required />
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="newsletter-pdf">PDF File</label>
+      <input type="file" id="newsletter-pdf" accept=".pdf" required />
+    </div>
+    <div id="upload-newsletter-error"></div>
+    <button type="submit">Upload Newsletter</button>
+  </form>
+  <div id="newsletters-admin-list" style="margin-top:1.5rem;">
+    <p class="admin-loading">Loading newsletters...</p>
+  </div>
+</div>
 
         <!-- ── Virtual Tour Video ─────────────────── -->
         <div class="admin-card">
@@ -198,6 +206,7 @@
           <h3>O'Conor Home</h3>
           <p>Caring for our community since 1918. This is your home — not ours.</p>
           <p class="footer-legal">The O'Conor Institute Trust Board<br>Registered Charity CC39255</p>
+          <a href="admin-login.html" class="footer-admin-link">Staff login</a>
         </div>
         <div class="footer-col">
           <h3>Quick Links</h3>

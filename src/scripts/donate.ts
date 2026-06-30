@@ -44,9 +44,17 @@ const modalConsent = document.getElementById('modal-consent') as HTMLInputElemen
 let currentAmount = 0;
 
 // ─── Open modal when a menu card is clicked ───────────
+const STRIPE_LIVE = false; // flip to true once Stripe is turned on
+
 document.querySelectorAll('.menu-item[data-amount]').forEach((card) => {
   card.addEventListener('click', (e) => {
     e.preventDefault();
+
+    if (!STRIPE_LIVE) {
+      alert('Card donations are coming soon! For now, please use the GiveALittle button below or make a direct bank transfer to support this item.');
+      return;
+    }
+
     const amount = parseFloat((card as HTMLElement).dataset.amount || '0');
     const name = (card as HTMLElement).dataset.name || 'Donation';
     openModal(amount, name);

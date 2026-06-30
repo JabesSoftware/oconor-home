@@ -6,12 +6,10 @@ const supabase = createClient(
 );
 
 async function loadEvents() {
-  const { data, error } = await supabase
-    .from('events')
-    .select('*')
-    .gte('date', new Date().toISOString().split('T')[0])
-    .order('date', { ascending: true });
-
+const { data, error } = await supabase
+  .from('events')
+  .select('*');
+  
   const container = document.getElementById('events-container') as HTMLDivElement;
 
   if (error || !data) {
@@ -19,16 +17,21 @@ async function loadEvents() {
     return;
   }
 
-  if (data.length === 0) {
+  const today = new Date().toISOString().split('T')[0];
+  const upcoming = data.filter(event => !event.date || event.date >= today);
+
+  if (upcoming.length === 0) {
     container.innerHTML = '<p class="no-events">No upcoming events at this time. Check back soon.</p>';
     return;
   }
 
-  container.innerHTML = data.map(event => `
+  container.innerHTML = upcoming.map(event => `
     <div class="event-card">
       <h3>${event.title}</h3>
       <p class="event-meta">
-        📅 ${new Date(event.date).toLocaleDateString('en-NZ', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+        📅 ${event.date
+          ? new Date(event.date).toLocaleDateString('en-NZ', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })
+          : 'Date TBC'}
         ${event.time ? '· 🕐 ' + event.time : ''}
         ${event.location ? '· 📍 ' + event.location : ''}
       </p>
