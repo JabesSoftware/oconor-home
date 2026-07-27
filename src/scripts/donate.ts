@@ -44,7 +44,7 @@ const modalConsent = document.getElementById('modal-consent') as HTMLInputElemen
 let currentAmount = 0;
 
 // ─── Open modal when a menu card is clicked ───────────
-const STRIPE_LIVE = false; // flip to true once Stripe is turned on
+const STRIPE_LIVE = true; // flip to true once Stripe is turned on
 
 document.querySelectorAll('.menu-item[data-amount]').forEach((card) => {
   card.addEventListener('click', (e) => {
